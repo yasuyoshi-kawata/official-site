@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawata Yasuyoshi - Official Website</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Zen Old Mincho (Japanese body), Cedarville Cursive (Name) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles */
+        :root {
+            /* Base color: Gray-900 (dark gray almost black) */
+            --color-primary: #111827;
+            /* Accent color: White */
+            --color-accent: #ffffff;
+            /* Sub-base: Gray-800 */
+            --color-secondary: #1F2937;
+        }
+
+        body {
+            font-family: 'Zen Old Mincho', serif;
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            scroll-behavior: smooth;
+        }
+
+        /* Custom fonts for specific elements */
+        .font-cursive {
+            font-family: 'Cedarville Cursive', cursive;
+        }
+
+        /* Customize scrollbar for a darker look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #222;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+
+        /* Text utility classes for language switch */
+        .text-ja[data-lang="en"],
+        .text-en[data-lang="ja"] {
+            display: none !important;
+        }
+        /* Ensure blocks show correctly after lang switch */
+        [data-lang="en"] .text-en.block { display: block !important; }
+        [data-lang="en"] .text-en.flex { display: flex !important; }
+        [data-lang="ja"] .text-ja.block { display: block !important; }
+        [data-lang="ja"] .text-ja.flex { display: flex !important; }
+
+        /* Custom style for the Contact button */
+        .contact-btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 2px var(--color-accent);
+        }
+        .contact-btn:hover {
+            background-color: var(--color-accent);
+            color: var(--color-primary);
+        }
+
+        /* Gallery Modal Styles */
+        #gallery-modal {
+            background-color: rgba(17, 24, 39, 0.95); /* Gray-900 with transparency */
+        }
+        .gallery-image-wrapper {
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .gallery-image-wrapper:hover {
+            opacity: 0.8;
+            transform: scale(1.02);
+        }
+
+    </style>
+</head>
+<body data-lang="ja">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm shadow-xl border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo/Site Title -->
+                <a href="#hero" class="text-2xl font-bold tracking-widest text-white hover:text-gray-300 transition duration-300">
+                    K.Y.
+                </a>
+                
+                <!-- Desktop Navigation (English Menu Titles) -->
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-6 text-sm font-semibold uppercase tracking-wider">
+                        <li><a href="#profile" class="text-white hover:text-gray-300 transition duration-300">Profile</a></li>
+                        <li><a href="#news" class="text-white hover:text-gray-300 transition duration-300">News</a></li>
+                        <li><a href="#concerts" class="text-white hover:text-gray-300 transition duration-300">Concerts</a></li>
+                        <li><a href="#gallery" class="text-white hover:text-gray-300 transition duration-300">Gallery</a></li>
+                        <li><a href="#contact" class="contact-btn py-2 px-4 rounded-full text-white">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Language Toggle & Mobile Menu Button -->
+                <div class="flex items-center space-x-4">
+                    <!-- Language Toggle -->
+                    <button id="lang-toggle" class="text-sm font-medium uppercase py-1 px-3 border border-white rounded-full hover:bg-white hover:text-gray-900 transition duration-300">
+                        EN
+                    </button>
+                    <!-- Mobile Menu Button (Hidden on desktop) -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white">
+                        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Initial hidden) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-700">
+            <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-lg font-semibold uppercase tracking-wider">
+                <li><a href="#profile" class="block px-3 py-2 rounded-md hover:bg-gray-800 transition duration-300">Profile</a></li>
+                <li><a href="#news" class="block px-3 py-2 rounded-md hover:bg-gray-800 transition duration-300">News</a></li>
+                <li><a href="#concerts" class="block px-3 py-2 rounded-md hover:bg-gray-800 transition duration-300">Concerts</a></li>
+                <li><a href="#gallery" class="block px-3 py-2 rounded-md hover:bg-gray-800 transition duration-300">Gallery</a></li>
+                <li><a href="#contact" class="block px-3 py-2 rounded-md hover:bg-gray-800 transition duration-300">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="h-[80vh] flex flex-col justify-center items-center text-center p-8 border-b border-gray-700">
+            <div class="max-w-4xl mx-auto">
+                <!-- Logo -->
+                <div class="w-32 h-32 sm:w-48 sm:h-48 mx-auto mb-6 p-4 border border-white rounded-full flex items-center justify-center bg-gray-800/50">
+                    <span class="text-4xl sm:text-6xl font-bold text-white tracking-widest">K.Y.</span>
+                    <!-- プレースホルダーロゴ (1:1) -->
+                </div>
+                <!-- Name -->
+                <h1 class="text-6xl sm:text-8xl font-cursive font-light text-white leading-none">
+                    Kawata Yasuyoshi
+                </h1>
+                <!-- Subtitle -->
+                <p class="mt-4 text-xl sm:text-2xl font-bold tracking-wider text-gray-300">
+                    <span class="text-ja block">指揮者 / Conductor</span>
+                    <span class="text-en hidden">Conductor</span>
+                </p>
+
+                <!-- SNS Links -->
+                <div class="mt-8 flex justify-center space-x-6">
+                    <a href="https://x.com/yasuyoshi__kwt" target="_blank" class="text-white hover:text-gray-300 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.001h3.696L14.7 10.42 24 23H17.652L12.35 15.653 6.649 23H3L10.871 13.578 2 1.001h6.643L12.656 7.63L18.901 1.001Zm-3.134 20.378h2.083L6.96 2.76H4.743L15.767 21.379Z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/yasuyoshi.kwt" target="_blank" class="text-white hover:text-gray-300 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.716 0 3.056.011 4.123.064 1.066.055 1.79.217 2.428.465.662.264 1.157.638 1.637 1.119.48.48.855.975 1.118 1.637.248.638.411 1.362.465 2.428.052 1.067.064 1.407.064 4.123s-.012 3.056-.064 4.123c-.055 1.066-.217 1.79-.465 2.428-.264.662-.638 1.157-1.119 1.637-.48.48-.975.855-1.637 1.118-.638.248-1.362.411-2.428.465-1.067.052-1.407.064-4.123.064s-3.056-.012-4.123-.064c-1.066-.055-1.79-.217-2.428-.465-.662-.264-1.157-.638-1.637-1.119-.48-.48-.855-.975-1.118-1.637-.248-.638-.411-1.362-.465-2.428-.052-1.067-.064-1.407-.064-4.123s.012-3.056.064-4.123c.055-1.066.217-1.79.465-2.428.264-.662.638-1.157 1.119-1.637.48-.48.975-.855 1.637-1.118.638-.248 1.362-.411 2.428-.465C8.944 2.011 9.284 2 12 2zm0 2c-2.671 0-2.99.011-4.041.062-1.03.053-1.611.201-2.062.378-.456.182-.79.398-1.106.714-.316.316-.532.65-.714 1.106-.177.451-.325 1.032-.378 2.062-.051 1.051-.062 1.37-.062 4.041s.011 2.99.062 4.041c.053 1.03.201 1.611.378 2.062.182.456.398.79.714 1.106.316.316.65.532 1.106.714.451.177 1.032.325 2.062.378 1.051.051 1.37.062 4.041.062s2.99-.011 4.041-.062c1.03-.053 1.611-.201 2.062-.378.456-.182.79-.398 1.106-.714.316-.316.65-.532 1.106-.714.451-.177 1.032-.325 2.062-.378C14.99 4.011 14.671 4 12 4zM12 7c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm0 2c1.656 0 3 1.344 3 3s-1.344 3-3 3-3-1.344-3-3 1.344-3 3-3zm6.5-5.5c-.71 0-1.282.572-1.282 1.282s.572 1.282 1.282 1.282 1.282-.572 1.282-1.282-.572-1.282-1.282-1.282z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@yasuyoshi_kwt" target="_blank" class="text-white hover:text-gray-300 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.195a2.532 2.532 0 0 0-1.789-1.789C16.891 1 12 1 12 1s-4.891 0-5.826.406a2.532 2.532 0 0 0-1.789 1.789C4 4.13 4 12 4 12s0 7.87.406 8.805a2.532 2.532 0 0 0 1.789 1.789C7.11 23 12 23 12 23s4.891 0 5.826-.406a2.532 2.532 0 0 0 1.789-1.789C20 19.87 20 12 20 12s0-7.87-.406-8.805zM9.99 15.421V8.579L15.11 12l-5.12 3.421z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="py-20 px-8">
+            <h2 class="text-4xl font-bold mb-12 uppercase tracking-widest text-center border-b pb-4">Profile</h2>
+            <div class="flex flex-col md:flex-row gap-12 max-w-5xl mx-auto items-start">
+                
+                <!-- Profile Image (3:4 aspect ratio) -->
+                <div class="w-full md:w-1/3 order-1 mx-auto md:mx-0">
+                    <div class="relative pt-[133.33%] w-full rounded-lg overflow-hidden shadow-2xl">
+                        <!-- Placeholder Image (3:4) -->
+                        <img src="https://placehold.co/400x533/374151/ffffff?text=Portrait" alt="" class="absolute top-0 left-0 w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- Profile Text -->
+                <div class="w-full md:w-2/3 order-2 text-lg leading-relaxed space-y-6">
+                    <!-- Japanese Content -->
+                    <div class="text-ja">
+                        <p><strong>川田 泰義 &nbsp; Kawata Yasuyoshi</strong></p>
+                        <p>2000年生まれ。宮城県仙台市出身。</p>
+                        <p>九州大学芸術工学部音響設計学科を卒業したのち、東京・福岡を拠点に全国各地でオーケストラと吹奏楽を指揮し、活躍の場を広げている。また、演奏会や音楽祭の企画制作・舞台業務にも数多く携わっている。2023年から現在まで、指揮者・木許裕介のアシスタントコンダクターを務める。</p>
+                        <p>指揮を木許裕介、ピアノを斎藤恵・宮崎由紀子、ソルフェージュを斎藤恵、打楽器を長谷川真弓・渡辺由美子の各氏に師事。</p>
+                        <p>Orchestra Flâner 主宰。</p>
+                    </div>
+                    <!-- English Content -->
+                    <div class="text-en hidden">
+                        <p><strong>Kawata Yasuyoshi</strong></p>
+                        <p>Born in 2000 in Sendai, Miyagi Prefecture, Japan.</p>
+                        <p>After graduating from the Department of Acoustic Design at Kyushu University's Faculty of Design, he has expanded his activities by conducting orchestras and wind ensembles across Japan, based in Tokyo and Fukuoka. He is also actively involved in the planning, production, and stage management of numerous concerts and music festivals. Since 2023, he has served as Assistant Conductor to Yuusuke Kimoto.</p>
+                        <p>He studied conducting under Yuusuke Kimoto; piano under Megumi Saito and Yukiko Miyazaki; solfège under Megumi Saito; and percussion under Mayumi Hasegawa and Yumiko Watanabe.</p>
+                        <p>He is the founder of Orchestra Flâner.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news" class="py-20 px-8 border-t border-gray-700">
+            <h2 class="text-4xl font-bold mb-12 uppercase tracking-widest text-center border-b pb-4">News</h2>
+            <div id="news-container" class="max-w-4xl mx-auto space-y-8">
+                <!-- News items will be inserted here by JavaScript -->
+                <p id="news-loading" class="text-center text-gray-500 text-ja">ニュースを読み込み中...</p>
+                <p id="news-error" class="text-center text-red-500 text-en hidden">Failed to load news data.</p>
+            </div>
+        </section>
+
+        <!-- Concerts Section -->
+        <section id="concerts" class="py-20 px-8 border-t border-gray-700">
+            <h2 class="text-4xl font-bold mb-12 uppercase tracking-widest text-center border-b pb-4">Concerts</h2>
+            <div class="max-w-5xl mx-auto space-y-12">
+
+                <!-- Upcoming Concerts -->
+                <h3 class="text-3xl font-bold uppercase tracking-wider text-gray-300">
+                    <span class="text-ja block">Upcoming</span>
+                    <span class="text-en hidden">Upcoming</span>
+                </h3>
+                <div id="upcoming-concerts" class="space-y-6">
+                    <!-- Upcoming Concerts will be inserted here by JavaScript -->
+                    <p id="upcoming-loading" class="text-center text-gray-500 text-ja">演奏会情報を読み込み中...</p>
+                    <p id="upcoming-empty" class="text-center text-gray-500 text-ja hidden">現在、予定されている演奏会情報はありません。</p>
+                </div>
+                
+                <!-- Archives -->
+                <h3 class="text-3xl font-bold uppercase tracking-wider text-gray-300 pt-8 border-t border-gray-700">
+                    <span class="text-ja block">Archive</span>
+                    <span class="text-en hidden">Archive</span>
+                </h3>
+                <div id="archive-concerts" class="space-y-6">
+                    <!-- Archive Concerts will be inserted here by JavaScript -->
+                    <p id="archive-loading" class="text-center text-gray-500 text-ja">アーカイブを読み込み中...</p>
+                    <p id="archive-empty" class="text-center text-gray-500 text-ja hidden">過去の演奏会情報がありません。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 px-8 border-t border-gray-700">
+            <h2 class="text-4xl font-bold mb-12 uppercase tracking-widest text-center border-b pb-4">Gallery</h2>
+            <div class="max-w-6xl mx-auto space-y-12">
+                
+                <!-- Photo Gallery (Firestore driven) -->
+                <h3 class="text-3xl font-bold uppercase tracking-wider text-gray-300">Photo</h3>
+                <div id="photo-gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Gallery photos will be inserted here by JavaScript -->
+                    <p id="gallery-loading" class="col-span-4 text-center text-gray-500 text-ja">写真を読み込み中...</p>
+                </div>
+
+                <!-- YouTube Videos -->
+                <h3 class="text-3xl font-bold uppercase tracking-wider text-gray-300 pt-8 border-t border-gray-700">YouTube</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Placeholder YouTube Embeds (Use responsive iframe wrappers) -->
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe class="w-full aspect-video rounded-lg shadow-2xl" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <p class="mt-2 text-sm text-gray-400 text-center"><span class="text-ja">演奏動画タイトル (Placeholder)</span><span class="text-en hidden">Performance Video Title (Placeholder)</span></p>
+                    </div>
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe class="w-full aspect-video rounded-lg shadow-2xl" src="https://www.youtube.com/embed/pC3_Uv376l8" title="YouTube video player 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <p class="mt-2 text-sm text-gray-400 text-center"><span class="text-ja">リハーサル風景 (Placeholder)</span><span class="text-en hidden">Rehearsal Scene (Placeholder)</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-8 border-t border-gray-700">
+            <h2 class="text-4xl font-bold mb-12 uppercase tracking-widest text-center border-b pb-4">Contact</h2>
+            <div class="max-w-2xl mx-auto p-8 rounded-lg bg-gray-800 shadow-2xl">
+                <p class="mb-6 text-center text-gray-300">
+                    <span class="text-ja">お問い合わせは以下のフォームにご記入ください。</span>
+                    <span class="text-en hidden">Please fill out the form below for inquiries.</span>
+                </p>
+
+                <form id="contact-form">
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-300">
+                            <span class="text-ja">お名前</span>
+                            <span class="text-en hidden">Name</span>
+                        </label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full p-3 rounded-md border-gray-600 bg-gray-900 text-white focus:ring-white focus:border-white">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full p-3 rounded-md border-gray-600 bg-gray-900 text-white focus:ring-white focus:border-white">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="message" class="block text-sm font-medium text-gray-300">
+                            <span class="text-ja">メッセージ</span>
+                            <span class="text-en hidden">Message</span>
+                        </label>
+                        <textarea id="message" name="message" rows="4" required class="mt-1 block w-full p-3 rounded-md border-gray-600 bg-gray-900 text-white focus:ring-white focus:border-white"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 mt-4 font-semibold contact-btn bg-white text-gray-900 rounded-full hover:bg-gray-700 hover:text-white transition duration-300">
+                        <span class="text-ja">送信</span>
+                        <span class="text-en hidden">Send</span>
+                    </button>
+                    
+                    <p id="form-status" class="mt-4 text-center text-sm"></p>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700 mt-10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-lg font-cursive text-white">Kawata Yasuyoshi</p>
+            <p class="mt-2 text-sm text-gray-400">&copy; 2024. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Modal for Alert/Confirmation (Instead of alert()) -->
+    <div id="custom-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-[100]">
+        <div class="bg-gray-800 p-8 rounded-lg max-w-sm w-full shadow-2xl border border-gray-700">
+            <h3 id="modal-title" class="text-xl font-bold mb-4 text-white">Notification</h3>
+            <p id="modal-message" class="text-gray-300 mb-6"></p>
+            <button id="modal-close-btn" class="w-full py-2 bg-white text-gray-900 font-semibold rounded-md hover:bg-gray-200 transition">OK</button>
+        </div>
+    </div>
+
+    <!-- Gallery Full-Screen Modal -->
+    <div id="gallery-modal" class="fixed inset-0 hidden items-center justify-center z-50 p-4" onclick="closeGalleryModal(event)">
+        <div class="relative max-w-5xl max-h-full w-full mx-auto" onclick="event.stopPropagation()">
+            <img id="modal-img" src="" alt="Gallery Image" class="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-2xl mx-auto">
+            <div id="modal-caption" class="mt-4 text-center text-white text-lg font-semibold bg-gray-900/50 p-2 rounded-lg"></div>
+            <button onclick="closeGalleryModal(event)" class="absolute top-4 right-4 text-white text-3xl font-bold bg-gray-900/50 rounded-full w-10 h-10 hover:bg-gray-700/70 transition">
+                &times;
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Firebase SDK Scripts -->
+    <script type="module">
+        // Import necessary Firebase functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, addDoc, onSnapshot, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // --- 1. GLOBAL VARIABLES & UTILS ---
+        setLogLevel('Debug');
+        
+        // Global variables provided by the environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'conductor-website-default';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db = null;
+        let auth = null;
+        let userId = null;
+        let isAuthReady = false;
+
+        // Custom Modal for non-alert() messages
+        function showModal(title, message) {
+            const modal = document.getElementById('custom-modal');
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').textContent = message;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        document.getElementById('modal-close-btn').onclick = () => {
+            const modal = document.getElementById('custom-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        };
+
+        // Date comparison utility (for sorting and distinguishing upcoming/archive)
+        function isUpcoming(dateString) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Ignore time for comparison
+            const concertDate = new Date(dateString);
+            return concertDate >= today;
+        }
+
+        // --- 2. FIREBASE INITIALIZATION & AUTH ---
+
+        if (firebaseConfig) {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+            } catch (error) {
+                console.error("Firebase initialization failed:", error);
+                showModal("Error", "Failed to initialize the database connection.");
+            }
+        } else {
+            console.error("Firebase config is missing.");
+            showModal("Error", "The application environment is missing Firebase configuration.");
+        }
+
+        // Authentication State Listener
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                userId = user.uid;
+                isAuthReady = true;
+                console.log("Authenticated with UID:", userId);
+                // Start listening to data once authenticated
+                if (db) {
+                    setupFirestoreListeners();
+                }
+            } else if (auth) {
+                // If not signed in, sign in anonymously or with custom token
+                try {
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                        console.log("Signed in with custom token.");
+                    } else {
+                        await signInAnonymously(auth);
+                        console.log("Signed in anonymously.");
+                    }
+                } catch (error) {
+                    console.error("Authentication failed:", error);
+                    isAuthReady = true; // Still mark as ready, but with no user
+                    if (db) { setupFirestoreListeners(); } // Still try to load public data
+                }
+            }
+        });
+
+        // --- 3. DATA RENDERING FUNCTIONS ---
+
+        // Utility to localize content based on current language
+        function localize(jaText, enText) {
+            const lang = document.body.getAttribute('data-lang');
+            return lang === 'en' ? enText : jaText;
+        }
+
+        // Render News Items
+        function renderNews(newsItems) {
+            const container = document.getElementById('news-container');
+            container.innerHTML = '';
+            document.getElementById('news-loading').classList.add('hidden');
+            
+            if (newsItems.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-500">${localize('新着情報はありません。', 'No news items available.')}</p>`;
+                return;
+            }
+
+            // Sort by date descending
+            newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            newsItems.forEach(item => {
+                const itemHtml = `
+                    <div class="p-4 rounded-lg bg-gray-800 shadow-xl border-l-4 border-white transition hover:bg-gray-700/50">
+                        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+                            ${item.imageUrl ? `<img src="${item.imageUrl}" alt="${localize(item.title_ja, item.title_en)}" onerror="this.onerror=null;this.src='https://placehold.co/100x100/374151/ffffff?text=Image';" class="w-24 h-24 object-cover rounded-md flex-shrink-0">` : ''}
+                            <div class="flex-grow">
+                                <p class="text-sm text-gray-400">${item.date}</p>
+                                <h4 class="text-xl font-bold mt-1 text-white">
+                                    <span class="text-ja">${item.title_ja}</span>
+                                    <span class="text-en hidden">${item.title_en}</span>
+                                </h4>
+                                <p class="mt-2 text-gray-300 text-sm">
+                                    <span class="text-ja">${item.body_ja}</span>
+                                    <span class="text-en hidden">${item.body_en}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', itemHtml);
+            });
+            // Update lang classes on new elements
+            updateLangClasses(document.body.getAttribute('data-lang'));
+        }
+
+        // Render Concert Items
+        function renderConcerts(concerts) {
+            const upcomingContainer = document.getElementById('upcoming-concerts');
+            const archiveContainer = document.getElementById('archive-concerts');
+            upcomingContainer.innerHTML = '';
+            archiveContainer.innerHTML = '';
+            document.getElementById('upcoming-loading').classList.add('hidden');
+            document.getElementById('archive-loading').classList.add('hidden');
+
+            const upcoming = [];
+            const archive = [];
+
+            concerts.forEach(c => {
+                if (isUpcoming(c.date)) {
+                    upcoming.push(c);
+                } else {
+                    archive.push(c);
+                }
+            });
+
+            // Sort upcoming ascending, archive descending
+            upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
+            archive.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Function to generate a single concert card HTML
+            const createConcertCard = (c) => `
+                <div class="p-6 rounded-lg bg-gray-800 shadow-xl flex flex-col md:flex-row gap-6 border-l-4 border-white">
+                    ${c.imageUrl ? `<img src="${c.imageUrl}" alt="${localize(c.title_ja, c.title_en)}" onerror="this.onerror=null;this.src='https://placehold.co/120x160/374151/ffffff?text=Poster';" class="w-32 h-auto object-cover rounded-md flex-shrink-0">` : ''}
+                    <div class="flex-grow">
+                        <p class="text-sm font-bold text-white">${c.date} ${c.time || ''}</p>
+                        <h4 class="text-2xl font-bold mt-1 text-white leading-snug">
+                            <span class="text-ja">${c.title_ja}</span>
+                            <span class="text-en hidden">${c.title_en}</span>
+                        </h4>
+                        <p class="text-gray-300 mt-2">
+                            <span class="text-ja">場所: ${c.venue_ja}</span>
+                            <span class="text-en hidden">Venue: ${c.venue_en}</span>
+                        </p>
+                        <p class="text-gray-400 mt-1 text-sm">
+                            <span class="text-ja">${c.details_ja}</span>
+                            <span class="text-en hidden">${c.details_en}</span>
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            if (upcoming.length > 0) {
+                upcoming.forEach(c => upcomingContainer.insertAdjacentHTML('beforeend', createConcertCard(c)));
+                document.getElementById('upcoming-empty').classList.add('hidden');
+            } else {
+                document.getElementById('upcoming-empty').classList.remove('hidden');
+            }
+
+            if (archive.length > 0) {
+                archive.forEach(c => archiveContainer.insertAdjacentHTML('beforeend', createConcertCard(c)));
+                document.getElementById('archive-empty').classList.add('hidden'); // Show nothing if empty
+            } else {
+                document.getElementById('archive-empty').classList.add('hidden'); // Show nothing if empty
+            }
+
+            // Update lang classes on new elements
+            updateLangClasses(document.body.getAttribute('data-lang'));
+        }
+
+        // Render Gallery Photos
+        function renderGallery(photos) {
+            const container = document.getElementById('photo-gallery-grid');
+            container.innerHTML = '';
+            document.getElementById('gallery-loading').classList.add('hidden');
+
+            if (photos.length === 0) {
+                container.innerHTML = `<p class="col-span-4 text-center text-gray-500">${localize('写真がありません。', 'No photos available.')}</p>`;
+                return;
+            }
+
+            // Sort by upload date descending
+            photos.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            photos.forEach(photo => {
+                const photoHtml = `
+                    <div class="gallery-image-wrapper rounded-lg overflow-hidden shadow-xl" 
+                         onclick="openGalleryModal('${photo.imageUrl}', '${photo.caption_ja}', '${photo.caption_en}')">
+                        <!-- Image with a default aspect ratio for grid layout -->
+                        <img src="${photo.imageUrl}" 
+                             alt="${localize(photo.caption_ja, photo.caption_en)}" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x300/374151/ffffff?text=No+Image';"
+                             class="w-full h-full object-cover aspect-square sm:aspect-video md:aspect-square">
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', photoHtml);
+            });
+        }
+        
+        // Function to open the Gallery Modal
+        window.openGalleryModal = function(imageUrl, captionJa, captionEn) {
+            const modal = document.getElementById('gallery-modal');
+            const imgEl = document.getElementById('modal-img');
+            const captionEl = document.getElementById('modal-caption');
+            const currentLang = document.body.getAttribute('data-lang');
+
+            imgEl.src = imageUrl;
+            imgEl.alt = currentLang === 'ja' ? captionJa : captionEn;
+            captionEl.textContent = currentLang === 'ja' ? captionJa : captionEn;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling background
+        }
+
+        // Function to close the Gallery Modal
+        window.closeGalleryModal = function(event) {
+            // Close only if clicking the close button or the backdrop
+            if (event.target.id === 'gallery-modal' || event.target.closest('button')) {
+                const modal = document.getElementById('gallery-modal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        }
+
+
+        // --- 4. FIREBASE LISTENERS ---
+        function setupFirestoreListeners() {
+            if (!db || !isAuthReady) {
+                console.warn("Firestore not ready. Skipping data listeners.");
+                return;
+            }
+
+            const newsCollectionPath = `artifacts/${appId}/public/data/news`;
+            const concertsCollectionPath = `artifacts/${appId}/public/data/concerts`;
+            const galleryCollectionPath = `artifacts/${appId}/public/data/gallery_photos`; // New collection for photos
+
+            // Listen for News Updates
+            const newsQuery = query(collection(db, newsCollectionPath));
+            onSnapshot(newsQuery, (snapshot) => {
+                const newsItems = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderNews(newsItems);
+            }, (error) => {
+                console.error("Error listening to News:", error);
+                document.getElementById('news-loading').classList.add('hidden');
+                document.getElementById('news-error').classList.remove('hidden');
+                showModal("Database Error", localize("新着情報の読み込みに失敗しました。", "Failed to load news data from the database."));
+            });
+
+            // Listen for Concert Updates
+            const concertsQuery = query(collection(db, concertsCollectionPath));
+            onSnapshot(concertsQuery, (snapshot) => {
+                const concertItems = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderConcerts(concertItems);
+            }, (error) => {
+                console.error("Error listening to Concerts:", error);
+                document.getElementById('upcoming-loading').classList.add('hidden');
+                document.getElementById('archive-loading').classList.add('hidden');
+                showModal("Database Error", localize("演奏会情報の読み込みに失敗しました。", "Failed to load concert data from the database."));
+            });
+
+            // Listen for Gallery Photo Updates
+            const galleryQuery = query(collection(db, galleryCollectionPath));
+            onSnapshot(galleryQuery, (snapshot) => {
+                const photoItems = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderGallery(photoItems);
+            }, (error) => {
+                console.error("Error listening to Gallery:", error);
+                document.getElementById('gallery-loading').classList.add('hidden');
+                showModal("Database Error", localize("写真ギャラリーの読み込みに失敗しました。", "Failed to load gallery photos from the database."));
+            });
+
+
+            console.log("Firestore listeners setup.");
+            
+            // --- Initial Data Insertion (Example for easy editing) ---
+            checkAndInsertMockData(newsCollectionPath, concertsCollectionPath, galleryCollectionPath);
+        }
+
+        async function checkAndInsertMockData(newsPath, concertsPath, galleryPath) {
+            
+            // Utility function to check if collection is empty
+            const isCollectionEmpty = async (path) => {
+                try {
+                    const snapshot = await getDocs(collection(db, path));
+                    return snapshot.empty;
+                } catch (e) {
+                    console.error(`Error checking collection ${path}:`, e);
+                    return false;
+                }
+            };
+            
+            // Check and Insert News
+            if (await isCollectionEmpty(newsPath)) {
+                console.log("News collection empty. Inserting mock data.");
+                try {
+                    await addDoc(collection(db, newsPath), {
+                        date: "2024-11-25",
+                        title_ja: "公式サイト公開のお知らせ",
+                        title_en: "Official Website Launch",
+                        body_ja: "指揮者、川田泰義の公式サイトが公開されました。",
+                        body_en: "The official website for conductor Yasuyoshi Kawata has been launched.",
+                        imageUrl: 'https://placehold.co/100x100/374151/ffffff?text=NEW'
+                    });
+                    await addDoc(collection(db, newsPath), {
+                        date: "2024-10-01",
+                        title_ja: "〇〇管弦楽団と共演",
+                        title_en: "Collaboration with XX Orchestra",
+                        body_ja: "10月1日のコンサートで、〇〇管弦楽団を指揮しました。",
+                        body_en: "Conducted the XX Orchestra at the concert on October 1st.",
+                        imageUrl: ''
+                    });
+                } catch (e) { console.error("Error writing mock News document: ", e); }
+            }
+
+            // Check and Insert Concerts
+            if (await isCollectionEmpty(concertsPath)) {
+                console.log("Concerts collection empty. Inserting mock data.");
+                try {
+                    // Upcoming
+                    await addDoc(collection(db, concertsPath), {
+                        date: "2025-01-15",
+                        time: "19:00",
+                        title_ja: "ニューイヤーコンサート 2025",
+                        title_en: "New Year Concert 2025",
+                        venue_ja: "東京オペラシティ コンサートホール",
+                        venue_en: "Tokyo Opera City Concert Hall",
+                        details_ja: "R.シュトラウス、ベートーヴェン他",
+                        details_en: "Works by R. Strauss, Beethoven, and others.",
+                        imageUrl: 'https://placehold.co/120x160/374151/ffffff?text=Upcoming+Poster'
+                    });
+                    // Archive
+                    await addDoc(collection(db, concertsPath), {
+                        date: "2024-06-20",
+                        time: "14:00",
+                        title_ja: "第3回 Orchestra Flâner 定期演奏会",
+                        title_en: "3rd Orchestra Flâner Subscription Concert",
+                        venue_ja: "アクロス福岡シンフォニーホール",
+                        venue_en: "Acros Fukuoka Symphony Hall",
+                        details_ja: "シベリウス：交響曲第2番、他",
+                        details_en: "Sibelius: Symphony No. 2, etc.",
+                        imageUrl: 'https://placehold.co/120x160/374151/ffffff?text=Archive+Poster'
+                    });
+                } catch (e) { console.error("Error writing mock Concert document: ", e); }
+            }
+
+            // Check and Insert Gallery Photos (New)
+            if (await isCollectionEmpty(galleryPath)) {
+                console.log("Gallery collection empty. Inserting mock photo data.");
+                try {
+                    await addDoc(collection(db, galleryPath), {
+                        date: "2024-11-20",
+                        imageUrl: 'https://placehold.co/600x450/4B5563/ffffff?text=Concert+Photo+16:9', // Wide photo
+                        caption_ja: "指揮台での一コマ（2024年11月）",
+                        caption_en: "A moment on the podium (Nov. 2024)",
+                    });
+                    await addDoc(collection(db, galleryPath), {
+                        date: "2024-11-10",
+                        imageUrl: 'https://placehold.co/400x600/6B7280/ffffff?text=Portrait+3:4', // Tall photo
+                        caption_ja: "リハーサル中のポートレート",
+                        caption_en: "Portrait during rehearsal",
+                    });
+                    await addDoc(collection(db, galleryPath), {
+                        date: "2024-09-01",
+                        imageUrl: 'https://placehold.co/800x400/9CA3AF/1F2937?text=Flaner+Orchestra+2:1', // Very wide photo
+                        caption_ja: "Orchestra Flâner 公演後の集合写真",
+                        caption_en: "Group photo after Orchestra Flâner performance",
+                    });
+                } catch (e) { console.error("Error writing mock Gallery document: ", e); }
+            }
+        }
+
+        // --- 5. UI INTERACTION & LANGUAGE SWITCH ---
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Hide mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Function to update element visibility based on current language
+        function updateLangClasses(newLang) {
+            document.querySelectorAll('.text-ja').forEach(el => {
+                el.style.display = newLang === 'ja' ? '' : 'none';
+                if (newLang === 'ja' && el.classList.contains('block')) el.style.display = 'block';
+                if (newLang === 'ja' && el.classList.contains('flex')) el.style.display = 'flex';
+            });
+            document.querySelectorAll('.text-en').forEach(el => {
+                el.style.display = newLang === 'en' ? '' : 'none';
+                if (newLang === 'en' && el.classList.contains('block')) el.style.display = 'block';
+                if (newLang === 'en' && el.classList.contains('flex')) el.style.display = 'flex';
+            });
+
+            // Update Gallery Modal Caption if open
+            const modal = document.getElementById('gallery-modal');
+            if (modal.classList.contains('flex')) {
+                const imgEl = document.getElementById('modal-img');
+                const captionEl = document.getElementById('modal-caption');
+                const captionJa = imgEl.getAttribute('data-caption-ja');
+                const captionEn = imgEl.getAttribute('data-caption-en');
+                if (captionJa && captionEn) {
+                    captionEl.textContent = newLang === 'ja' ? captionJa : captionEn;
+                }
+            }
+        }
+
+        // Language Toggle Functionality
+        document.getElementById('lang-toggle').addEventListener('click', (e) => {
+            const currentLang = document.body.getAttribute('data-lang');
+            const newLang = currentLang === 'ja' ? 'en' : 'ja';
+            document.body.setAttribute('data-lang', newLang);
+            e.target.textContent = newLang === 'ja' ? 'EN' : 'JA';
+
+            // Apply new visibility state
+            updateLangClasses(newLang);
+        });
+
+        // Initial setup for language classes
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLangClasses(document.body.getAttribute('data-lang'));
+        });
+
+
+        // Contact Form Submission (Mock)
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const statusEl = document.getElementById('form-status');
+            const button = this.querySelector('button');
+            const originalButtonText = button.textContent;
+            
+            button.disabled = true;
+            button.textContent = localize('送信中...', 'Sending...');
+            statusEl.textContent = '';
+            statusEl.classList.remove('text-green-500', 'text-red-500');
+
+            if (!db) {
+                 statusEl.textContent = localize('データベースに接続されていません。送信できません。', 'Database connection not ready. Cannot send.');
+                 statusEl.classList.add('text-red-500');
+                 button.disabled = false;
+                 button.textContent = originalButtonText;
+                 return;
+            }
+
+            try {
+                // Collect form data
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    message: document.getElementById('message').value,
+                    timestamp: new Date().toISOString()
+                };
+
+                // Save to Firestore (using a private collection for contact forms)
+                const contactPath = `artifacts/${appId}/users/${userId}/contact_inquiries`;
+                await addDoc(collection(db, contactPath), formData);
+
+                statusEl.textContent = localize('メッセージが正常に送信されました。ありがとうございます。', 'Message sent successfully. Thank you.');
+                statusEl.classList.add('text-green-500');
+                this.reset();
+                showModal(localize("送信完了", "Message Sent"), localize("お問い合わせ内容を承りました。回答が必要な場合は、折り返しご連絡いたします。", "Your inquiry has been received. We will get back to you if a response is needed."));
+            } catch (error) {
+                console.error("Form submission error:", error);
+                statusEl.textContent = localize('送信中にエラーが発生しました。', 'An error occurred during submission.');
+                statusEl.classList.add('text-red-500');
+                showModal(localize("送信エラー", "Submission Error"), localize("メッセージの送信に失敗しました。時間をおいて再度お試しください。", "Failed to send the message. Please try again later."));
+            } finally {
+                button.disabled = false;
+                button.textContent = originalButtonText;
+            }
+        });
+
+    </script>
+</body>
+</html>
