@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Concerts | YASUYOSHI KAWATA</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Japanese Font: Zen Kaku Gothic New -->
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Load Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1e1e1e;
+            background-color: #ffffff;
+        }
+
+        /* Custom configuration for Tailwind */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-red': '#800000', /* アクセントカラー: 濃い赤/マルーン */
+                        'text-dark': '#1e1e1e',
+                    },
+                    fontFamily: {
+                        // 日本語本文用フォント
+                        'sans-ja': ['"Zen Kaku Gothic New"', 'sans-serif'], 
+                        'mincho': ['"Zen Kaku Gothic New"', 'sans-serif'], 
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </style>
+</head>
+<body class="text-text-dark antialiased">
+
+    <!-- 1. NAVIGATION SECTION (Same as index.html) -->
+    <!-- Note: In a real multi-page site, this would be a separate component, 
+         but for a single-file template, we duplicate the structure. -->
+    <section id="main-nav" class="bg-white sticky top-0 z-40 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Desktop Layout (sm:サイズ以上で表示) -->
+            <div class="hidden sm:flex justify-between items-center py-6">
+                <!-- Branding (左寄せ) - メインページへのリンク -->
+                <a href="index.html#hero" class="flex items-center space-x-2 text-xl font-bold tracking-widest uppercase">
+                    <span class="text-text-dark font-mincho">Kawata Yasuyoshi</span>
+                </a>
+
+                <!-- Navigation Menu (中央) - メインページのセクションへのリンク -->
+                <nav>
+                    <ul class="flex space-x-8 text-sm font-medium uppercase">
+                        <li><a href="index.html#profile" class="nav-link hover:text-primary-red transition duration-300">PROFILE</a></li>
+                        <li><a href="index.html#news" class="nav-link hover:text-primary-red transition duration-300">NEWS</a></li>
+                        <li class="border-b-2 border-primary-red"><a href="#" class="nav-link text-primary-red transition duration-300">CONCERTS</a></li> <!-- 現在のページを示す -->
+                        <li><a href="index.html#photo" class="nav-link hover:text-primary-red transition duration-300">PHOTO</a></li>
+                        <li><a href="index.html#video" class="nav-link hover:text-primary-red transition duration-300">VIDEO</a></li>
+                        <li><a href="index.html#contact" class="nav-link hover:text-primary-red transition duration-300">CONTACT</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Social Icons and Language Switch (右寄せ) -->
+                <div class="flex items-center space-x-4">
+                    <a href="https://x.com/yasuyoshi__kwt" target="_blank" aria-label="X (Twitter)" class="text-text-dark hover:text-primary-red transition duration-300">
+                        <i data-lucide="combine" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.instagram.com/yasuyoshi.kwt" target="_blank" aria-label="Instagram" class="text-text-dark hover:text-primary-red transition duration-300">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@yasuyoshi_kwt" target="_blank" aria-label="YouTube" class="text-text-dark hover:text-primary-red transition duration-300">
+                        <i data-lucide="youtube" class="w-5 h-5"></i>
+                    </a>
+                    <button id="lang-toggle" class="text-sm font-semibold p-2 rounded-full border border-gray-300 hover:bg-gray-50 transition duration-200">
+                        <span id="current-lang-text">EN</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Layout (sm:サイズ未満で表示) -->
+            <div class="sm:hidden flex justify-between items-center h-20">
+                <!-- Logo (2行表示) -->
+                <a href="index.html#hero" class="flex flex-col space-y-0.5 text-center text-lg font-bold tracking-tight uppercase leading-none">
+                    <span class="text-text-dark text-base">KAWATA</span>
+                    <span class="text-text-dark text-xs font-semibold">YASUYOSHI</span>
+                </a>
+                
+                <!-- Language Switch and Mobile Menu Button -->
+                <div class="flex items-center space-x-4">
+                    <button id="lang-toggle-mobile" class="text-sm font-semibold p-2 rounded-full border border-gray-300 hover:bg-gray-50 transition duration-200">
+                        <span id="current-lang-text-mobile">EN</span>
+                    </button>
+                    <button id="mobile-menu-button" class="p-2 rounded-md hover:bg-gray-100 transition duration-200">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu (Hidden by default, sm:サイズ未満で表示) -->
+            <nav id="mobile-menu" class="sm:hidden absolute top-20 left-0 right-0 bg-white shadow-lg hidden">
+                <ul class="flex flex-col space-y-2 p-4 text-center uppercase">
+                    <li><a href="index.html#profile" class="mobile-nav-link block py-2 hover:bg-gray-50 transition duration-300">PROFILE</a></li>
+                    <li><a href="index.html#news" class="mobile-nav-link block py-2 hover:bg-gray-50 transition duration-300">NEWS</a></li>
+                    <li class="bg-gray-100"><a href="#" class="mobile-nav-link block py-2 text-primary-red transition duration-300">CONCERTS</a></li>
+                    <li><a href="index.html#photo" class="mobile-nav-link block py-2 hover:bg-gray-50 transition duration-300">PHOTO</a></li>
+                    <li><a href="index.html#video" class="mobile-nav-link block py-2 hover:bg-gray-50 transition duration-300">VIDEO</a></li>
+                    <li><a href="index.html#contact" class="mobile-nav-link block py-2 hover:bg-gray-50 transition duration-300">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <main>
+        <!-- Header Section -->
+        <header class="bg-gray-50 py-16 mb-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- ページタイトル -->
+                <h1 class="text-4xl font-light border-l-4 border-primary-red pl-4" data-key="page_title">今後の演奏会 | Upcoming Performances</h1>
+            </div>
+        </header>
+
+        <!-- Filter and Concert List Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+            
+            <!-- 年月フィルタープルダウン -->
+            <div class="mb-8 flex justify-end">
+                <label for="month-filter" class="mr-3 flex items-center text-lg font-semibold font-mincho text-gray-700">
+                    <i data-lucide="filter" class="w-5 h-5 mr-1 text-primary-red"></i>
+                    <span data-key="filter_label">年月で絞り込み:</span>
+                </label>
+                <select id="month-filter" class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-red focus:border-primary-red font-mincho text-lg">
+                    <!-- Options populated by JavaScript -->
+                </select>
+            </div>
+
+            <div id="upcoming-concert-full-list" class="space-y-6">
+                <!-- JSにより全ての今後の演奏会がここに挿入されます -->
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="index.html#concerts"
+                   class="inline-flex items-center justify-center px-8 py-3 text-lg font-semibold 
+                          text-text-dark bg-white border-2 border-gray-400 
+                          rounded-full hover:bg-gray-100 transition duration-300 shadow-lg">
+                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+                    <span data-key="back_to_top">メインページに戻る</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Full-Screen Modal for Image Display (New Component) -->
+    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none" onclick="closeModal()">
+        <!-- Modal Content (Clicking outside closes it) -->
+        <div class="max-w-5xl max-h-full" onclick="event.stopPropagation()">
+            <img id="modal-image" src="" alt="Full size concert image" class="rounded-lg shadow-2xl max-w-full max-h-[90vh] object-contain cursor-default" />
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-primary-red transition duration-200">
+                <i data-lucide="x" class="w-10 h-10"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-text-dark text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Footer Social Icons -->
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://x.com/yasuyoshi__kwt" target="_blank" aria-label="X (Twitter)" class="text-white hover:text-primary-red transition duration-300">
+                    <i data-lucide="combine" class="w-6 h-6"></i>
+                </a>
+                <a href="https://www.instagram.com/yasuyoshi.kwt" target="_blank" aria-label="Instagram" class="text-white hover:text-primary-red transition duration-300">
+                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                </a>
+                <a href="https://www.youtube.com/@yasuyoshi_kwt" target="_blank" aria-label="YouTube" class="text-white hover:text-primary-red transition duration-300">
+                    <i data-lucide="youtube" class="w-6 h-6"></i>
+                </a>
+            </div>
+            
+            <p class="text-sm font-light">&copy; <span id="current-year"></span> YASUYOSHI KAWATA. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // --- Multi-Language Content Data (Replicated from index.html for self-contained file) ---
+        const concertData = {
+            // 今後の演奏会 (imageプロパティをimages(配列)に変更)
+            upcoming: [
+                { date: '2025.03.15', day: 'Sat', location: 'Tokyo', title_ja: 'Orchestra Flâner 第3回 定期演奏会', program_ja: 'R. シュトラウス：交響詩『英雄の生涯』 他', title_en: 'The 3rd Orchestra Flâner Subscription Concert', program_en: 'R. Strauss: Ein Heldenleben, and others', images: ['concert1.jpg', 'concert1_b.jpg', 'concert1_c.jpg'] },
+                { date: '2025.02.20', day: 'Thu', location: 'Osaka', title_ja: '関西フィルハーモニー管弦楽団 特別公演 (副指揮)', program_ja: 'マーラー：交響曲第1番『巨人』', title_en: 'Kansai Philharmonic Special Performance (Ass. Cond.)', program_en: 'Mahler: Symphony No. 1 "Titan"', images: ['concert_placeholder_3.jpg', 'concert_placeholder_3_b.jpg'] },
+                { date: '2025.01.12', day: 'Sun', location: 'Sendai', title_ja: '仙台青年吹奏楽団 ニューイヤーコンサート', program_ja: 'J.S.バッハ：トッカータとフーガ ニ短調（編曲版） 他', title_en: 'Sendai Youth Wind Orchestra New Year Concert', program_en: 'J.S. Bach: Toccata and Fugue in D Minor (Arr.) and others', images: ['concert_placeholder_2.jpg'] }, // 1枚のみの場合も配列で保持
+                { date: '2024.12.05', day: 'Thu', location: 'Yokohama', title_ja: '横浜シンフォニエッタ 客演指揮', program_ja: 'ベートーヴェン：交響曲第7番', title_en: 'Guest Conductor with Yokohama Sinfonietta', program_en: 'Beethoven: Symphony No. 7', images: ['concert_placeholder_1.jpg', 'concert_placeholder_1_b.jpg', 'concert_placeholder_1_c.jpg'] },
+                { date: '2024.11.23', day: 'Sat', location: 'Nagoya', title_ja: '名古屋市民オーケストラ 定期演奏会', program_ja: 'シベリウス：交響曲第2番', title_en: 'Nagoya Citizens Orchestra Subscription Concert', program_en: 'Sibelius: Symphony No. 2', images: ['concert_placeholder_4.jpg', 'concert_placeholder_4_b.jpg'] },
+                // 仮の追加データ
+                { date: '2024.11.10', day: 'Sun', location: 'Kobe', title_ja: '神戸室内合奏団 演奏会', program_ja: 'モーツァルト：交響曲第39番', title_en: 'Kobe Chamber Ensemble Concert', program_en: 'Mozart: Symphony No. 39', images: ['concert_placeholder_10.jpg'] },
+                { date: '2024.10.28', day: 'Mon', location: 'Tokyo', title_ja: '新国立劇場オペラ公演 (アシスタント)', program_ja: 'プッチーニ：蝶々夫人', title_en: 'New National Theatre Opera (Assistant)', program_en: 'Puccini: Madama Butterfly', images: ['concert_placeholder_11.jpg', 'concert_placeholder_11_b.jpg'] },
+            ]
+        };
+
+        const contentData = {
+            ja: {
+                page_title: "今後の演奏会",
+                back_to_top: "メインページに戻る",
+                filter_label: "年月で絞り込み:",
+            },
+            en: {
+                page_title: "Upcoming Performances",
+                back_to_top: "Back to Main Page",
+                filter_label: "Filter by Month:",
+            }
+        };
+
+        let currentLang = 'ja'; // 初期表示は日本語です
+        let selectedMonth = 'all'; // 選択された年月 (初期値は全て表示)
+
+        /**
+         * Generates the HTML string for a single, full concert item.
+         * @param {object} concert - The concert data object.
+         * @param {string} lang - The current language ('ja' or 'en').
+         * @param {number} index - The index of the concert in the list, used for unique ID.
+         * @returns {string} The HTML string.
+         */
+        function generateConcertHtml(concert, lang, index) {
+            const titleKey = `title_${lang}`;
+            const programKey = `program_${lang}`;
+            const concertId = `concert-${index}`; // 各コンサートに一意のID
+            
+            // プレースホルダー画像を縦長 (300x400) に変更
+            const imagePlaceholderUrl = `https://placehold.co/300x400/f0f0f0/333?text=Concert+Image`;
+
+            // スライダーHTMLの生成 (images配列の各要素に対してスライドを生成)
+            const slidesHtml = concert.images.map((imageFile, slideIndex) => `
+                <div class="concert-slide absolute inset-0 transition-opacity duration-500 ${slideIndex === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}">
+                    <img src="images/${imageFile}" 
+                         alt="${concert[titleKey]} Image ${slideIndex + 1}" 
+                         data-original-src="images/${imageFile}"
+                         class="w-full h-full object-cover cursor-pointer"
+                         onclick="openModal(this)"
+                         onerror="this.onerror=null;this.src='${imagePlaceholderUrl}';">
+                </div>
+            `).join('');
+
+            // インジケータドットの生成
+            const indicatorDots = concert.images.map((_, dotIndex) => `
+                <div id="${concertId}-dot-${dotIndex}" class="w-2 h-2 rounded-full bg-white transition-all duration-300 ${dotIndex === 0 ? 'bg-opacity-80' : 'bg-opacity-40'}"></div>
+            `).join('');
+
+            // スライドボタンの表示/非表示を決定 (画像が1枚ならボタンは不要)
+            const controlsClass = concert.images.length > 1 ? 'opacity-0 group-hover:opacity-100' : 'hidden';
+
+            return `
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden border border-gray-100 transition duration-300 hover:shadow-2xl" id="${concertId}" data-current-slide="0">
+                    <div class="grid grid-cols-1 lg:grid-cols-4">
+                        <!-- Content Column (3/4 width) - Left -->
+                        <div class="lg:col-span-3 p-6 sm:p-8 space-y-4">
+                            <!-- Date & Location -->
+                            <div class="flex items-center space-x-4 text-primary-red font-semibold">
+                                <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                                <!-- 1. 日付・曜日: text-lg (18px) -->
+                                <span class="text-lg">${concert.date} (${concert.day})</span>
+                                <span class="text-gray-500">|</span>
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                <!-- 2. 場所: text-base (16px) -->
+                                <span class="text-base">${concert.location}</span>
+                            </div>
+
+                            <!-- Title & Program -->
+                            <div class="border-l-4 border-gray-200 pl-4">
+                                <!-- 3. 公演タイトル: text-xl (20px) -->
+                                <h3 class="text-xl font-bold font-mincho">${concert[titleKey]}</h3>
+                                <p class="text-gray-700 mt-1 font-mincho">${concert[programKey]}</p>
+                            </div>
+
+                            <!-- Detail Text (空のdiv) -->
+                            <div class="pt-2">
+                                <!-- 公演詳細への誘導テキストを削除 -->
+                            </div>
+                        </div>
+                        
+                        <!-- Image Column (1/4 width) - Right - SLIDER CONTAINER -->
+                        <div class="lg:col-span-1 h-64 lg:h-80 relative overflow-hidden group">
+                            <!-- Slides -->
+                            ${slidesHtml}
+
+                            <!-- Slider Controls (画像が1枚の場合は非表示) -->
+                            <div class="absolute inset-0 flex justify-between items-center z-30 transition-opacity duration-300 ${controlsClass}">
+                                <!-- Previous Button -->
+                                <button onclick="changeSlide('${concertId}', -1, event)" 
+                                        aria-label="Previous slide"
+                                        class="p-2 bg-black bg-opacity-40 text-white rounded-r-lg hover:bg-opacity-70 transition duration-200 ml-0.5">
+                                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                                </button>
+                                <!-- Next Button -->
+                                <button onclick="changeSlide('${concertId}', 1, event)" 
+                                        aria-label="Next slide"
+                                        class="p-2 bg-black bg-opacity-40 text-white rounded-l-lg hover:bg-opacity-70 transition duration-200 mr-0.5">
+                                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                                </button>
+                            </div>
+
+                            <!-- Indicator Dots (画像が1枚の場合は非表示) -->
+                            <div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-1 z-20 ${concert.images.length > 1 ? '' : 'hidden'}">
+                                ${indicatorDots}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        /**
+         * Renders the full list of upcoming concerts, applying the current filter.
+         * @param {string} lang - The target language ('ja' or 'en').
+         */
+        function renderFullConcertList(lang) {
+            const listContainer = document.getElementById('upcoming-concert-full-list');
+            
+            // 日付順（昇順）にソート
+            const sortedConcerts = [...concertData.upcoming].sort((a, b) => {
+                // 'YYYY.MM.DD' 形式を Date オブジェクトに変換して比較
+                const dateA = new Date(a.date.replace(/\./g, '/'));
+                const dateB = new Date(b.date.replace(/\./g, '/'));
+                return dateA - dateB;
+            });
+
+            // フィルタリング
+            const filteredConcerts = sortedConcerts.filter(concert => {
+                if (selectedMonth === 'all') return true;
+                
+                // コンサート日付 (YYYY.MM.DD) から YYYY.MM を抽出してフィルタ値と比較
+                const concertMonth = concert.date.substring(0, 7); // '2025.03'
+                return concertMonth === selectedMonth;
+            });
+
+
+            if (listContainer) {
+                if (filteredConcerts.length === 0) {
+                    // 日本語と英語のメッセージを contentData から取得するように修正
+                    const noConcertMessage = lang === 'ja' 
+                        ? "選択された期間の演奏会情報はありません。" 
+                        : "No concert information available for the selected period.";
+                    listContainer.innerHTML = `<p class="text-xl text-center text-gray-500 py-10 font-mincho">${noConcertMessage}</p>`;
+                } else {
+                    listContainer.innerHTML = filteredConcerts.map((concert, index) => // indexを渡す
+                        generateConcertHtml(concert, lang, index)
+                    ).join('');
+                }
+            }
+            
+            // Re-create icons (for the new buttons and any dynamic content)
+            lucide.createIcons();
+        }
+        
+        /**
+         * Changes the slide for a specific concert slider.
+         * @param {string} concertId - The ID of the concert container (e.g., 'concert-0').
+         * @param {number} direction - 1 for next, -1 for previous.
+         * @param {Event} event - The click event to stop propagation from triggering openModal.
+         */
+        function changeSlide(concertId, direction, event) {
+            // モーダルオープンイベントと競合しないように伝播を停止
+            event.stopPropagation();
+            
+            const concertEl = document.getElementById(concertId);
+            if (!concertEl) return;
+
+            const slides = concertEl.querySelectorAll('.concert-slide');
+            const totalSlides = slides.length;
+            if (totalSlides <= 1) return; // 1枚以下ならスライド操作は不要
+
+            let currentSlideIndex = parseInt(concertEl.getAttribute('data-current-slide') || '0', 10);
+            
+            // 次のスライドインデックスを計算
+            let newSlideIndex = currentSlideIndex + direction;
+            
+            // ループ処理
+            if (newSlideIndex >= totalSlides) {
+                newSlideIndex = 0; // 最後のスライドから次に進むと最初に戻る
+            } else if (newSlideIndex < 0) {
+                newSlideIndex = totalSlides - 1; // 最初のスライドから前に戻ると最後に行く
+            }
+
+            // 現在のスライドを非表示にし、新しいスライドを表示
+            // 全てのスライドを初期状態に戻す
+            slides.forEach((slide, index) => {
+                slide.classList.remove('opacity-100', 'z-10');
+                slide.classList.add('opacity-0', 'z-0');
+            });
+            
+            // 新しいスライドを表示
+            slides[newSlideIndex].classList.remove('opacity-0', 'z-0');
+            slides[newSlideIndex].classList.add('opacity-100', 'z-10');
+
+            // インジケータドットの更新
+            const dotsContainer = concertEl.querySelector('.bottom-2');
+            if (dotsContainer) {
+                dotsContainer.querySelectorAll('div').forEach((dot, index) => {
+                    if (index === newSlideIndex) {
+                        dot.classList.remove('bg-opacity-40');
+                        dot.classList.add('bg-opacity-80');
+                    } else {
+                        dot.classList.remove('bg-opacity-80');
+                        dot.classList.add('bg-opacity-40');
+                    }
+                });
+            }
+
+            // 状態を更新
+            concertEl.setAttribute('data-current-slide', newSlideIndex);
+            
+            // Lucideアイコンを再作成 (ボタンのアイコンを確実にするため)
+            lucide.createIcons();
+        }
+
+
+        /**
+         * コンサートデータから存在する年月を抽出し、プルダウンにオプションを設定します。
+         */
+        function populateMonthFilter(lang) {
+            const filterSelect = document.getElementById('month-filter');
+            if (!filterSelect) return;
+
+            // 既存のオプションをクリア
+            filterSelect.innerHTML = '';
+
+            // 1. 「全て」のオプションを追加
+            const allOption = document.createElement('option');
+            allOption.value = 'all';
+            allOption.textContent = lang === 'ja' ? '全て' : 'All Dates';
+            filterSelect.appendChild(allOption);
+
+            // 2. 年月を抽出してユニークなリストを作成
+            const uniqueMonths = new Set();
+            concertData.upcoming.forEach(concert => {
+                // 'YYYY.MM.DD' から 'YYYY.MM' を抽出
+                uniqueMonths.add(concert.date.substring(0, 7));
+            });
+
+            // 3. 年月をソート
+            const sortedMonths = Array.from(uniqueMonths).sort();
+
+            // 4. 各年月をオプションとして追加
+            sortedMonths.forEach(month => {
+                const option = document.createElement('option');
+                option.value = month; // '2024.11'
+                
+                // 表示形式を 'YYYY年MM月' または 'MM/YYYY' に整形
+                const [year, monthNum] = month.split('.');
+                if (lang === 'ja') {
+                    option.textContent = `${year}年${parseInt(monthNum, 10)}月`;
+                } else {
+                    option.textContent = `${parseInt(monthNum, 10)}/${year}`;
+                }
+                
+                filterSelect.appendChild(option);
+            });
+
+            // 選択状態を復元
+            filterSelect.value = selectedMonth;
+        }
+
+        /**
+         * Switches the language of the entire page content.
+         * @param {string} lang - The target language ('ja' or 'en').
+         */
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const content = contentData[lang];
+            
+            // Update all elements with a data-key attribute
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (content[key] !== undefined) {
+                    el.textContent = content[key];
+                }
+            });
+
+            // プルダウンを言語に合わせて再設定
+            populateMonthFilter(lang);
+            
+            // Re-render the full concert list (フィルター結果も言語に合わせて更新される)
+            renderFullConcertList(lang);
+
+            // Update language toggle button (Desktop)
+            const langToggleBtn = document.getElementById('current-lang-text');
+            if (langToggleBtn) {
+                langToggleBtn.textContent = (lang === 'ja' ? 'EN' : 'JA');
+            }
+            // Update language toggle button (Mobile)
+            const langToggleBtnMobile = document.getElementById('current-lang-text-mobile');
+            if (langToggleBtnMobile) {
+                langToggleBtnMobile.textContent = (lang === 'ja' ? 'EN' : 'JA');
+            }
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        /**
+         * Opens the full-screen modal with the clicked image.
+         * @param {HTMLImageElement} imgElement - The clicked image element.
+         */
+        function openModal(imgElement) {
+            const originalSrc = imgElement.getAttribute('data-original-src');
+            const modalImage = document.getElementById('modal-image');
+            const modal = document.getElementById('image-modal');
+            
+            if (modalImage && modal) {
+                // 画像URLを設定
+                modalImage.src = originalSrc;
+                
+                // モーダルを表示
+                modal.classList.remove('pointer-events-none', 'opacity-0');
+                modal.classList.add('pointer-events-auto', 'opacity-100');
+                
+                // bodyのスクロールを無効化
+                document.body.style.overflow = 'hidden';
+                
+                // Lucideアイコンを再作成（モーダル内のXボタン用）
+                lucide.createIcons();
+            }
+        }
+
+        /**
+         * Closes the full-screen modal.
+         */
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            if (modal) {
+                // モーダルを非表示
+                modal.classList.remove('pointer-events-auto', 'opacity-100');
+                modal.classList.add('pointer-events-none', 'opacity-0');
+                
+                // bodyのスクロールを復元
+                document.body.style.overflow = '';
+            }
+        }
+
+
+        // --- Event Listeners and Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Initial content load (Start in Japanese)
+            switchLanguage(currentLang);
+
+            // Language Toggle Button Click Handler (Desktop and Mobile)
+            const desktopLangToggle = document.getElementById('lang-toggle');
+            const mobileLangToggle = document.getElementById('lang-toggle-mobile');
+
+            const toggleHandler = () => {
+                const newLang = currentLang === 'ja' ? 'en' : 'ja';
+                switchLanguage(newLang);
+            };
+
+            if (desktopLangToggle) desktopLangToggle.addEventListener('click', toggleHandler);
+            if (mobileLangToggle) mobileLangToggle.addEventListener('click', toggleHandler);
+
+            // Month Filter Change Handler
+            const monthFilter = document.getElementById('month-filter');
+            if (monthFilter) {
+                monthFilter.addEventListener('change', (event) => {
+                    selectedMonth = event.target.value;
+                    renderFullConcertList(currentLang);
+                });
+            }
+
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Change icon
+                const icon = mobileMenuButton.querySelector('i');
+                const isMenu = icon.getAttribute('data-lucide') === 'menu';
+                icon.setAttribute('data-lucide', isMenu ? 'x' : 'menu');
+                lucide.createIcons(); // Re-render icon
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.querySelector('i').setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
