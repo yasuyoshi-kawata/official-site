@@ -6,8 +6,8 @@
     <title>YASUYOSHI KAWATA | OFFICIAL WEBSITE</title>
     <!-- Load Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Japanese Font: Zen Old Mincho -->
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Load Japanese Font: Zen Kaku Gothic New (新しいフォント) -->
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Load Icons (Lucide) -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -19,26 +19,23 @@
             background-color: #ffffff;
         }
 
-        /* Custom configuration for Tailwind (臙脂 and Fonts) */
+        /* Custom configuration for Tailwind (ACCENT COLOR: #800000 and Fonts) */
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'primary-red': '#A63A50', /* 臙脂色 - ヒーローセクションの赤のベースとして使用 */
+                        'primary-red': '#800000', /* 新しいアクセントカラー: 濃い赤/マルーン */
                         'text-dark': '#1e1e1e',
                     },
                     fontFamily: {
-                        'mincho': ['"Zen Old Mincho"', 'serif'], /* 日本語本文用 */
+                        // 日本語本文用フォントを Zen Kaku Gothic New に変更
+                        'sans-ja': ['"Zen Kaku Gothic New"', 'sans-serif'], 
+                        // 元の font-mincho を残しつつ、本文の font-mincho クラスをこの新しいフォントにマッピング
+                        'mincho': ['"Zen Kaku Gothic New"', 'sans-serif'], 
                         'sans': ['Inter', 'sans-serif'],
                     },
                 }
             }
-        }
-        
-        /* ヒーローセクションの白いカーブを生成するためのカスタムCSS */
-        .hero-curve-separator {
-            /* 楕円クリップパスを使用して滑らかなカーブを作成 */
-            clip-path: ellipse(120% 100% at 50% 100%);
         }
         
         /* 参照画像の雰囲気を出すためのヒーロー画像スタイル */
@@ -55,18 +52,19 @@
     <section id="hero" class="relative flex items-center justify-center h-[90vh] min-h-[600px] overflow-hidden bg-primary-red">
         <!-- Background Image: Dark, high-contrast style -->
         <div class="absolute inset-0 bg-cover bg-center hero-image-style" 
-             style="background-image: url('images/top.jpg');">
+             style="background-image: url('images/hero_subject.jpg');">
              <!-- Placeholder for the dark, red-toned image of the person -->
-             <img src="https://placehold.co/1920x1080/A63A50/f0f0f0?text=Striking+Portrait+Image" 
+             <!-- Placeholder background color updated to match new primary-red -->
+             <img src="https://placehold.co/1920x1080/800000/f0f0f0?text=Striking+Portrait+Image" 
                   alt="Hero Portrait" 
                   class="hidden" 
-                  onerror="this.parentElement.style.backgroundImage = 'url(\'https://placehold.co/1920x1080/A63A50/f0f0f0?text=Striking+Portrait+Image\')';">
+                  onerror="this.parentElement.style.backgroundImage = 'url(\'https://placehold.co/1920x1080/800000/f0f0f0?text=Striking+Portrait+Image\')';">
         </div>
         <!-- Red Overlay to enhance the color tone -->
         <div class="absolute inset-0 bg-primary-red opacity-30"></div>
         
-        <!-- White Curve Separator at the bottom -->
-        <div class="absolute bottom-0 left-0 right-0 h-10 bg-white hero-curve-separator"></div>
+        <!-- White Straight Separator at the bottom (Curve removed, now a simple white block) -->
+        <div class="absolute bottom-0 left-0 right-0 h-48 bg-white"></div>
 
         <!-- ヒーローセクションのコンテンツ（参照画像に合わせて非表示） -->
         <div class="relative z-10 text-center text-white">
@@ -75,18 +73,20 @@
     </section>
 
     <!-- 2. NAVIGATION SECTION (Below Hero - Non-Fixed) -->
-    <section id="main-nav" class="bg-white sticky top-0 z-40 shadow-sm md:shadow-none">
+    <section id="main-nav" class="bg-white sticky top-0 z-40 shadow-sm sm:shadow-none">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Desktop Layout -->
-            <div class="hidden md:flex justify-between items-center py-6">
+            <!-- Desktop Layout (sm:サイズ以上で表示) -->
+            <div class="hidden sm:flex justify-between items-center py-6">
                 <!-- Branding (左寄せ) -->
                 <a href="#hero" class="flex items-center space-x-2 text-xl font-bold tracking-widest uppercase">
+                    <!-- font-mincho クラスは Zen Kaku Gothic New にマッピングされました -->
                     <span class="text-text-dark font-mincho">Kawata Yasuyoshi</span>
                 </a>
 
                 <!-- Navigation Menu (中央) -->
                 <nav>
                     <ul class="flex space-x-8 text-sm font-medium uppercase">
+                        <!-- primary-redがホバー色として適用されます -->
                         <li><a href="#profile" class="nav-link hover:text-primary-red transition duration-300">PROFILE</a></li>
                         <li><a href="#news" class="nav-link hover:text-primary-red transition duration-300">NEWS</a></li>
                         <li><a href="#concerts" class="nav-link hover:text-primary-red transition duration-300">CONCERTS</a></li>
@@ -113,13 +113,12 @@
                 </div>
             </div>
 
-            <!-- Mobile Layout (Header Bar) -->
-            <div class="md:hidden flex justify-between items-center h-20">
-                <!-- Logo (Small 1:1) -->
-                <a href="#hero" class="flex items-center space-x-2 text-lg font-bold tracking-widest uppercase">
-                    <!-- Simple 1:1 Logo Placeholder -->
-                    <div class="w-8 h-8 rounded-full bg-primary-red flex items-center justify-center text-white text-sm font-extrabold">K</div>
-                    <span class="text-text-dark">Y. KAWATA</span>
+            <!-- Mobile Layout (sm:サイズ未満で表示) -->
+            <div class="sm:hidden flex justify-between items-center h-20">
+                <!-- Logo (2行表示) -->
+                <a href="#hero" class="flex flex-col space-y-0.5 text-center text-lg font-bold tracking-tight uppercase leading-none">
+                    <span class="text-text-dark text-base">KAWATA</span>
+                    <span class="text-text-dark text-xs font-semibold">YASUYOSHI</span>
                 </a>
                 
                 <!-- Language Switch and Mobile Menu Button -->
@@ -133,8 +132,8 @@
                 </div>
             </div>
 
-            <!-- Mobile Menu (Hidden by default) -->
-            <nav id="mobile-menu" class="md:hidden absolute top-20 left-0 right-0 bg-white shadow-lg hidden">
+            <!-- Mobile Menu (Hidden by default, sm:サイズ未満で表示) -->
+            <nav id="mobile-menu" class="sm:hidden absolute top-20 left-0 right-0 bg-white shadow-lg hidden">
                 <ul class="flex flex-col space-y-2 p-4 text-center uppercase">
                     <li><a href="#profile" class="mobile-nav-link block py-2 hover:bg-gray-50 transition duration-300">PROFILE</a></li>
                     <li><a href="#news" class="mobile-nav-link block py-2 hover:bg-gray-50 transition duration-300">NEWS</a></li>
@@ -153,7 +152,7 @@
 
             <!-- 3. PROFILE SECTION -->
             <section id="profile" class="pb-16 pt-8">
-                <!-- セクション名を英語に直接変更 -->
+                <!-- primary-redが下線色として適用されます -->
                 <h2 class="text-4xl font-light mb-12 uppercase border-b border-primary-red pb-2 w-full max-w-lg mx-auto md:mx-0" data-key="profile_heading">PROFILE</h2>
                 
                 <!-- 1:2 ratio for Photo:Text on medium screens and up -->
@@ -174,6 +173,7 @@
                         <h3 class="text-3xl font-bold mb-4" data-key="profile_name_ja">川田 泰義</h3>
                         <h4 class="text-xl font-light mb-6 text-gray-600">Kawata Yasuyoshi</h4>
                         
+                        <!-- font-mincho クラスは Zen Kaku Gothic New にマッピングされました -->
                         <div class="text-lg leading-relaxed space-y-6 font-mincho" data-key="profile_body">
                             <!-- Content will be inserted by JS -->
                         </div>
@@ -183,7 +183,7 @@
 
             <!-- 4. NEWS SECTION -->
             <section id="news" class="pb-16 pt-8">
-                <!-- セクション名を英語に直接変更 -->
+                <!-- primary-redが下線色として適用されます -->
                 <h2 class="text-4xl font-light mb-12 uppercase border-b border-primary-red pb-2" data-key="news_heading">NEWS</h2>
                 
                 <div class="space-y-8">
@@ -198,9 +198,11 @@
                         <div class="flex-grow">
                             <p class="text-sm text-gray-500 mb-1">2024.11.01</p>
                             <h3 class="text-xl font-semibold mb-2" data-key="news_title_1">The 3rd Orchestra Flâner Subscription Concert Announced!</h3>
+                            <!-- font-mincho クラスは Zen Kaku Gothic New にマッピングされました -->
                             <p class="text-gray-700 font-mincho" data-key="news_content_1">
                                 <!-- Content will be inserted by JS -->
                             </p>
+                            <!-- primary-redがリンク色として適用されます -->
                             <a href="#" class="text-primary-red hover:opacity-80 transition duration-300 text-sm mt-2 inline-block" data-key="news_read_more">詳細を見る &rarr;</a>
                         </div>
                     </div>
@@ -215,9 +217,11 @@
                         <div class="flex-grow">
                             <p class="text-sm text-gray-500 mb-1">2024.10.15</p>
                             <h3 class="text-xl font-semibold mb-2" data-key="news_title_2">Appointed as Assistant Conductor to Yusuke Kimoto</h3>
+                            <!-- font-mincho クラスは Zen Kaku Gothic New にマッピングされました -->
                             <p class="text-gray-700 font-mincho" data-key="news_content_2">
                                 <!-- Content will be inserted by JS -->
                             </p>
+                            <!-- primary-redがリンク色として適用されます -->
                             <a href="#" class="text-primary-red hover:opacity-80 transition duration-300 text-sm mt-2 inline-block" data-key="news_read_more">詳細を見る &rarr;</a>
                         </div>
                     </div>
@@ -226,104 +230,93 @@
 
             <!-- 5. CONCERTS SECTION -->
             <section id="concerts" class="pb-16 pt-8">
-                <!-- セクション名を英語に直接変更 -->
+                <!-- primary-redが下線色として適用されます -->
                 <h2 class="text-4xl font-light mb-12 uppercase border-b border-primary-red pb-2" data-key="concerts_heading">CONCERTS</h2>
                 
                 <div class="space-y-10">
                     <!-- Current Concerts -->
                     <div id="current-concerts">
-                        <!-- サブ見出しを英語に直接変更 -->
+                        <!-- primary-redが見出し色として適用されます -->
                         <h3 class="text-2xl font-bold mb-6 text-primary-red" data-key="concerts_current_title">Upcoming Performances</h3>
                         
-                        <!-- Concert Item 1 (Future) -->
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 items-center border-b border-gray-100 py-4">
-                            <div class="md:col-span-1">
-                                <p class="text-lg font-bold">2025.03.15</p>
-                                <p class="text-sm text-gray-500">Sat / Tokyo</p>
-                            </div>
-                            <div class="md:col-span-2">
-                                <p class="text-lg font-mincho font-medium" data-key="concert_title_1">Orchestra Flâner 第3回 定期演奏会</p>
-                                <p class="text-sm text-gray-600 font-mincho" data-key="concert_program_1">R. シュトラウス：交響詩『英雄の生涯』 他</p>
-                            </div>
-                            <div class="md:col-span-1">
-                                <img src="images/concert1.jpg" 
-                                     alt="Concert Image 1" 
-                                     class="w-full h-auto rounded-lg object-cover"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/300x150/f9f9f9/333?text=Concert+Image+3';">
-                            </div>
+                        <!-- コンサートリストはJSによって挿入されます -->
+                        <div id="upcoming-concert-list">
+                            <!-- JS renders here -->
+                        </div>
+                        
+                        <!-- 詳細ボタン (JSで表示/非表示を制御) -->
+                        <div id="upcoming-concert-link-container" class="mt-8 text-center hidden">
+                            <!-- primary-redをアクセントにしたボタン -->
+                            <a href="#" onclick="alert('このボタンは、すべての今後の演奏会を一覧表示する別ページへのリンクをシミュレートしています。')"
+                               class="inline-flex items-center justify-center px-8 py-3 text-lg font-semibold 
+                                      text-primary-red bg-white border-2 border-primary-red 
+                                      rounded-full hover:bg-red-50 transition duration-300 shadow-lg">
+                                <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+                                <span data-key="concerts_upcoming_link">その他の公演情報はこちらから</span>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Past Concerts (Archive) -->
                     <div id="past-concerts">
-                        <!-- サブ見出しを英語に直接変更 -->
-                        <h3 class="text-2xl font-bold mb-6 text-gray-600 mt-12" data-key="concerts_archive_title">Past Performances (Archive)</h3>
+                        <!-- サブ見出しはグレーのまま維持 -->
+                        <h3 class="text-2xl font-bold mb-6 text-gray-600 mt-20" data-key="concerts_archive_title">Past Performances (Archive)</h3>
 
-                        <!-- Concert Item 2 (Past) -->
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 items-center border-b border-gray-100 py-4 opacity-70">
-                            <div class="md:col-span-1">
-                                <p class="text-lg font-bold">2024.08.01</p>
-                                <p class="text-sm text-gray-500">Thu / Fukuoka</p>
-                            </div>
-                            <div class="md:col-span-2">
-                                <p class="text-lg font-mincho font-medium" data-key="concert_title_2">九州交響楽団 特別演奏会 (Assistant Conductor)</p>
-                                <p class="text-sm text-gray-600 font-mincho" data-key="concert_program_2">チャイコフスキー：交響曲第5番 他</p>
-                            </div>
-                            <div class="md:col-span-1">
-                                <img src="images/concert2.jpg" 
-                                     alt="Concert Image 2" 
-                                     class="w-full h-auto rounded-lg object-cover"
-                                     onerror="this.onerror=null;this.src='https://placehold.co/300x150/f9f9f9/333?text=Concert+Image+2';">
-                            </div>
+                        <!-- アーカイブコンサートリストはJSによって挿入されます -->
+                        <div id="past-concert-list">
+                            <!-- JS renders here -->
+                        </div>
+
+                        <!-- 詳細ボタン (JSで表示/非表示を制御) -->
+                        <div id="past-concert-link-container" class="mt-8 text-center hidden">
+                            <!-- primary-redをアクセントにしたボタン -->
+                            <a href="#" onclick="alert('このボタンは、すべての過去の演奏会を一覧表示する別ページへのリンクをシミュレートしています。')"
+                               class="inline-flex items-center justify-center px-8 py-3 text-lg font-semibold 
+                                      text-primary-red bg-white border-2 border-primary-red 
+                                      rounded-full hover:bg-red-50 transition duration-300 shadow-lg">
+                                <i data-lucide="archive" class="w-5 h-5 mr-2"></i>
+                                <span data-key="concerts_past_link">過去の演奏会一覧はこちらから</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 6. PHOTO SECTION -->
+            <!-- 6. PHOTO SECTION (UPDATED FOR SLIDER) -->
             <section id="photo" class="pb-16 pt-8">
-                <!-- セクション名を英語に直接変更 -->
+                <!-- primary-redが下線色として適用されます -->
                 <h2 class="text-4xl font-light mb-12 uppercase border-b border-primary-red pb-2" data-key="photo_heading">PHOTOS</h2>
                 
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <!-- Photo 1 -->
-                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition duration-300 gallery-item" 
-                         data-src="images/gallery1.jpg" data-caption-ja="2024年 オーケストラとの共演 (東京)" data-caption-en="2024 Performance with Orchestra (Tokyo)">
-                        <img src="images/gallery1.jpg" 
-                             alt="Gallery Photo 1" 
-                             class="w-full h-full object-cover"
-                             onerror="this.onerror=null;this.src='https://placehold.co/500x500/e0e0e0/333?text=Photo+1';">
+                <!-- Slider Container -->
+                <div class="relative max-w-5xl mx-auto">
+                    <div id="photo-slider" class="relative overflow-hidden rounded-xl shadow-2xl aspect-[16/9]">
+                        <!-- Slides are dynamically inserted here by JavaScript -->
+                        
+                        <!-- Caption Display -->
+                        <!-- font-mincho クラスは Zen Kaku Gothic New にマッピングされました -->
+                        <div id="slide-caption" class="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-center py-3 px-4 font-mincho text-sm sm:text-base pointer-events-none">
+                            <!-- Dynamic Caption -->
+                        </div>
+                        
+                        <!-- Navigation Buttons -->
+                        <button id="prev-slide" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-3 rounded-r-lg transition duration-300 z-10 focus:outline-none">
+                            <i data-lucide="chevron-left" class="w-8 h-8"></i>
+                        </button>
+                        <button id="next-slide" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-3 rounded-l-lg transition duration-300 z-10 focus:outline-none">
+                            <i data-lucide="chevron-right" class="w-8 h-8"></i>
+                        </button>
                     </div>
-                    <!-- Photo 2 -->
-                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition duration-300 gallery-item"
-                         data-src="images/gallery2.jpg" data-caption-ja="コンサート前のリハーサル風景" data-caption-en="Rehearsal before the concert">
-                        <img src="images/gallery2.jpg" 
-                             alt="Gallery Photo 2" 
-                             class="w-full h-full object-cover"
-                             onerror="this.onerror=null;this.src='https://placehold.co/500x500/e0e0e0/333?text=Photo+2';">
-                    </div>
-                    <!-- Photo 3 -->
-                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition duration-300 gallery-item"
-                         data-src="images/gallery3.jpg" data-caption-ja="Orchestra Flâner 公演より" data-caption-en="From an Orchestra Flâner performance">
-                        <img src="images/gallery3.jpg" 
-                             alt="Gallery Photo 3" 
-                             class="w-full h-full object-cover"
-                             onerror="this.onerror=null;this.src='https://placehold.co/500x500/e0e0e0/333?text=Photo+3';">
-                    </div>
-                    <!-- Photo 4 -->
-                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition duration-300 hidden lg:block gallery-item"
-                         data-src="images/gallery4.jpg" data-caption-ja="指揮者・木許裕介氏との打ち合わせ" data-caption-en="Meeting with Conductor Yusuke Kimoto">
-                        <img src="images/gallery4.jpg" 
-                             alt="Gallery Photo 4" 
-                             class="w-full h-full object-cover"
-                             onerror="this.onerror=null;this.src='https://placehold.co/500x500/e0e0e0/333?text=Photo+4';">
+                    
+                    <!-- Thumbnail Indicators -->
+                    <div id="thumbnail-indicators" class="flex justify-center flex-wrap space-x-2 mt-4">
+                        <!-- Thumbnails will be generated here by JS -->
                     </div>
                 </div>
             </section>
 
             <!-- 7. VIDEO SECTION -->
             <section id="video" class="pb-16 pt-8">
-                <!-- セクション名を英語に直接変更 -->
+                <!-- primary-redが下線色として適用されます -->
                 <h2 class="text-4xl font-light mb-12 uppercase border-b border-primary-red pb-2" data-key="video_heading">VIDEOS</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -339,21 +332,23 @@
                 </div>
             </section>
 
-            <!-- 8. CONTACT SECTION -->
+            <!-- 8. CONTACT SECTION (UPDATED) -->
             <section id="contact" class="pb-16 pt-8">
-                <!-- セクション名を英語に直接変更 -->
+                <!-- primary-redが下線色として適用されます -->
                 <h2 class="text-4xl font-light mb-12 uppercase border-b border-primary-red pb-2" data-key="contact_heading">CONTACT</h2>
 
-                <div class="text-center space-y-4">
+                <div class="text-center space-y-8"> 
+                    <!-- font-mincho クラスは Zen Kaku Gothic New にマッピングされました -->
                     <p class="text-xl font-mincho" data-key="contact_text">
                         <!-- Content will be inserted by JS -->
                     </p>
+                    <!-- ボタンは黒の縁取りと黒文字のまま維持 -->
                     <a href="mailto:yasuyoshi.K.1217@gmail.com" 
-                       class="inline-block px-8 py-3 text-lg font-semibold text-white bg-primary-red rounded-full hover:bg-opacity-90 transition duration-300 shadow-lg">
-                        <i data-lucide="mail" class="w-5 h-5 inline mr-2"></i>
-                        E-MAIL ME
+                       class="inline-block px-8 py-3 text-lg font-semibold 
+                              text-text-dark bg-white border-2 border-text-dark 
+                              rounded-full hover:bg-gray-100 transition duration-300 shadow-lg">
+                        Contact Us
                     </a>
-                    <p class="text-sm text-gray-500 mt-4">yasuyoshi.K.1217@gmail.com</p>
                 </div>
             </section>
         </div>
@@ -367,6 +362,7 @@
             </button>
             <div class="flex flex-col items-center">
                 <img id="modal-image" src="" alt="Enlarged image" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+                <!-- font-mincho クラスは Zen Kaku Gothic New にマッピングされました -->
                 <p id="modal-caption" class="mt-4 text-white text-lg text-center font-mincho p-2 max-w-3xl"></p>
             </div>
         </div>
@@ -396,60 +392,299 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // --- Multi-Language Content Data ---
+        // --- Multi-Language Content Data (UPDATED) ---
+        const concertData = {
+            // 今後の演奏会 (5件)
+            upcoming: [
+                { date: '2025.03.15', day: 'Sat', location: 'Tokyo', title_ja: 'Orchestra Flâner 第3回 定期演奏会', program_ja: 'R. シュトラウス：交響詩『英雄の生涯』 他', title_en: 'The 3rd Orchestra Flâner Subscription Concert', program_en: 'R. Strauss: Ein Heldenleben, and others', image: 'concert1.jpg' },
+                { date: '2025.02.20', day: 'Thu', location: 'Osaka', title_ja: '関西フィルハーモニー管弦楽団 特別公演 (副指揮)', program_ja: 'マーラー：交響曲第1番『巨人』', title_en: 'Kansai Philharmonic Special Performance (Ass. Cond.)', program_en: 'Mahler: Symphony No. 1 "Titan"', image: 'concert_placeholder_3.jpg' },
+                { date: '2025.01.12', day: 'Sun', location: 'Sendai', title_ja: '仙台青年吹奏楽団 ニューイヤーコンサート', program_ja: 'J.S.バッハ：トッカータとフーガ ニ短調（編曲版） 他', title_en: 'Sendai Youth Wind Orchestra New Year Concert', program_en: 'J.S. Bach: Toccata and Fugue in D Minor (Arr.) and others', image: 'concert_placeholder_2.jpg' },
+                { date: '2024.12.05', day: 'Thu', location: 'Yokohama', title_ja: '横浜シンフォニエッタ 客演指揮', program_ja: 'ベートーヴェン：交響曲第7番', title_en: 'Guest Conductor with Yokohama Sinfonietta', program_en: 'Beethoven: Symphony No. 7', image: 'concert_placeholder_1.jpg' },
+                { date: '2024.11.23', day: 'Sat', location: 'Nagoya', title_ja: '名古屋市民オーケストラ 定期演奏会', program_ja: 'シベリウス：交響曲第2番', title_en: 'Nagoya Citizens Orchestra Subscription Concert', program_en: 'Sibelius: Symphony No. 2', image: 'concert_placeholder_4.jpg' },
+            ],
+            // 過去の演奏会 (5件)
+            past: [
+                { date: '2024.08.01', day: 'Thu', location: 'Fukuoka', title_ja: '九州交響楽団 特別演奏会 (Assistant Conductor)', program_ja: 'チャイコフスキー：交響曲第5番 他', title_en: 'Kyushu Symphony Orchestra Special Concert (Ass. Cond.)', program_en: 'Tchaikovsky: Symphony No. 5, and others', image: 'concert2.jpg' },
+                { date: '2024.05.18', day: 'Sat', location: 'Tokyo', title_ja: 'Orchestra Flâner 第2回 定期演奏会', program_ja: 'ドヴォルザーク：交響曲第9番『新世界より』', title_en: 'The 2nd Orchestra Flâner Subscription Concert', program_en: 'Dvořák: Symphony No. 9 "From the New World"', image: 'concert_placeholder_5.jpg' },
+                { date: '2024.03.10', day: 'Sun', location: 'Kyoto', title_ja: '京都ジュニアオーケストラ 指導', program_ja: 'ブリテン：青少年のための管弦楽入門', title_en: 'Coaching Kyoto Junior Orchestra', program_en: 'Britten: The Young Person\'s Guide to the Orchestra', image: 'concert_placeholder_6.jpg' },
+                { date: '2023.11.03', day: 'Fri', location: 'Sapporo', title_ja: '札幌大学管弦楽団 定期演奏会', program_ja: 'サン＝サーンス：交響曲第3番『オルガン付き』', title_en: 'Sapporo University Orchestra Subscription Concert', program_en: 'Saint-Saëns: Symphony No. 3 "Organ"', image: 'concert_placeholder_7.jpg' },
+                { date: '2023.09.28', day: 'Thu', location: 'Hiroshima', title_ja: 'アシスタントコンダクター就任記念 特別コンサート', program_ja: 'モーツァルト：交響曲第41番『ジュピター』', title_en: 'Assistant Conductor Appointment Commemoration Concert', program_en: 'Mozart: Symphony No. 41 "Jupiter"', image: 'concert_placeholder_8.jpg' },
+            ]
+        };
+
+        // --- New Photo/Gallery Data ---
+        const galleryData = [
+            { src: 'images/gallery1.jpg', caption_ja: '2024年 オーケストラとの共演 (東京)', caption_en: '2024 Performance with Orchestra (Tokyo)' },
+            { src: 'images/gallery2.jpg', caption_ja: 'コンサート前のリハーサル風景', caption_en: 'Rehearsal before the concert' },
+            { src: 'images/gallery3.jpg', caption_ja: 'Orchestra Flâner 公演より', caption_en: 'From an Orchestra Flâner performance' },
+            { src: 'images/gallery4.jpg', caption_ja: '指揮者・木許裕介氏との打ち合わせ', caption_en: 'Meeting with Conductor Yusuke Kimoto' },
+            // Placeholder images for a richer gallery experience
+            { src: 'https://placehold.co/800x450/444444/ffffff?text=Portrait+Shot', caption_ja: 'ポートレート撮影のオフショット', caption_en: 'Off-shot from portrait session' },
+            { src: 'https://placehold.co/800x450/666666/ffffff?text=Podium+View', caption_ja: '指揮台からの風景', caption_en: 'View from the podium' },
+        ];
+
+
         const contentData = {
             ja: {
                 hero_title: "Kawata Yasuyoshi", // 日英共通で固定
                 profile_name_ja: "川田 泰義",
+                // ここも新しいフォントが適用されます
                 profile_body: `
                     <p>2000年生まれ。宮城県仙台市出身。</p>
-                    <p>九州大学芸術工学部音響設計学科を卒業したのち、東京・福岡を拠点に全国各地でオーケストラと吹奏楽を指揮し、活躍の場を広げている。<br>また、演奏会や音楽祭の企画制作・舞台業務にも数多く携わっている。<br>2023年から現在まで、指揮者・木許裕介のアシスタントコンダクターを務める。</p>
+                    <p>九州大学芸術工学部音響設計学科を卒業したのち、東京・福岡を拠点に全国各地でオーケストラと吹奏楽を指揮し、活躍の場を広げている。また、演奏会や音楽祭の企画制作・舞台業務にも数多く携わっている。2023年から現在まで、指揮者・木許裕介のアシスタントコンダクターを務める。</p>
                     <p>指揮を木許裕介、ピアノを斎藤恵・宮崎由紀子、ソルフェージュを斎藤恵、打楽器を長谷川真弓・渡辺由美子の各氏に師事。</p>
-                    <p>Orchestra Flâner 主宰</p>
+                    <p class="font-bold">Orchestra Flâner 主宰。</p>
                 `,
                 news_title_1: "第3回 Orchesrta Flâner 定期演奏会 開催決定！",
                 news_content_1: "Orchestra Flânerの次回定期演奏会が2025年3月15日に決定しました。チケット情報など詳細は追って公式サイトにて公開いたします。",
                 news_title_2: "指揮者 木許裕介氏のアシスタントコンダクターに就任",
                 news_content_2: "2023年より指揮者 木許裕介氏のアシスタントコンダクターとして活動を開始いたしました。活動の詳細についてはこちらをご覧ください。",
-                news_read_more: "詳細を見る;",
+                news_read_more: "詳細を見る &rarr;",
                 concerts_current_title: "今後の演奏会",
                 concerts_archive_title: "過去の演奏会 (アーカイブ)",
-                concert_title_1: "Orchestra Flâner 第3回 定期演奏会",
-                concert_program_1: "R. シュトラウス：交響詩『英雄の生涯』 他",
-                concert_title_2: "九州交響楽団 特別演奏会 (Assistant Conductor)",
-                concert_program_2: "チャイコフスキー：交響曲第5番 他",
+                concerts_upcoming_link: "その他の公演情報はこちらから",
+                concerts_past_link: "過去の演奏会一覧はこちらから",
                 video_placeholder_1: "YouTube動画のプレースホルダー",
                 video_placeholder_2: "YouTube動画のプレースホルダー",
-                contact_text: "演奏依頼、共演、その他お問い合わせは、下記メールアドレスへお気軽にご連絡ください。"
+                contact_text: "出演のご依頼、その他お問い合わせはこちらから"
             },
             en: {
                 hero_title: "Kawata Yasuyoshi", // 日英共通で固定
                 profile_name_ja: "Yasuyoshi Kawata",
                 profile_body: `
-                    <p>Born in 2000 in Sendai, Japan.</p>
-                    <p>After graduating from Kyushu University's Faculty of Design, Department of Acoustic Design, he has expanded his activities by conducting orchestras and wind orchestras across Japan, based in Tokyo and Fukuoka. He is also involved in the planning, production, and stage management of numerous concerts and music festivals. Since 2023, he has served as Assistant Conductor to Maestro Yusuke Kimoto.</p>
-                    <p>He studied conducting under Yusuke Kimoto, piano under Megumi Saito and Yukiko Miyazaki, solfège under Megumi Saito, and percussion under Mayumi Hasegawa and Yumiko Watanabe.</p>
-                    <p class="font-bold">Founder of Orchestra Flâner.</p>
+                    <p>Born in 2000 in Sendai, Miyagi Prefecture, Japan.</p>
+                    <p>After graduating from Kyushu University's Faculty of Design, Department of Acoustic Design, he has expanded his activities by conducting orchestras and wind bands across Japan, based in Tokyo and Fukuoka. He is also involved in the planning, production, and stage management of numerous concerts and music festivals. Since 2023, he has served as Assistant Conductor to Maestro Yusuke Kimoto.</p>
+                    <p>Founder of Orchestra Flâner.</p>
                 `,
                 news_title_1: "The 3rd Orchestra Flâner Subscription Concert Announced!",
                 news_content_1: "The next subscription concert for Orchestra Flâner has been scheduled for March 15, 2025. Details on ticketing and other information will be released soon on the official website.",
                 news_title_2: "Appointed as Assistant Conductor to Yusuke Kimoto",
                 news_content_2: "Since 2023, he has begun activities as Assistant Conductor to Maestro Yusuke Kimoto. Please see here for more information on his work.",
-                news_read_more: "Read More;",
+                news_read_more: "Read More &rarr;",
                 concerts_current_title: "Upcoming Performances",
                 concerts_archive_title: "Past Performances (Archive)",
-                concert_title_1: "The 3rd Orchestra Flâner Subscription Concert",
-                concert_program_1: "R. Strauss: Ein Heldenleben, and others",
-                concert_title_2: "Kyushu Symphony Orchestra Special Concert (Assistant Conductor)",
-                concert_program_2: "Tchaikovsky: Symphony No. 5, and others",
+                concerts_upcoming_link: "View All Upcoming Performances",
+                concerts_past_link: "View All Past Performances",
                 video_placeholder_1: "YouTube Video Placeholder",
                 video_placeholder_2: "YouTube Video Placeholder",
-                contact_text: "For performance requests, collaborations, or other inquiries, please feel free to contact us at the email address below."
+                contact_text: "For requests regarding performances, coaching, and other inquiries, please contact us here."
             }
         };
 
         let currentLang = 'ja'; // 初期表示は日本語です
 
+        /**
+         * Generates the HTML string for a single concert item.
+         * @param {object} concert - The concert data object.
+         * @param {string} lang - The current language ('ja' or 'en').
+         * @param {boolean} isPast - True if the concert is in the past (for styling).
+         * @returns {string} The HTML string.
+         */
+        function generateConcertHtml(concert, lang, isPast) {
+            const titleKey = `title_${lang}`;
+            const programKey = `program_${lang}`;
+            const opacityClass = isPast ? 'opacity-70' : '';
+            const imagePlaceholderUrl = `https://placehold.co/300x150/f9f9f9/333?text=${isPast ? 'Past' : 'Upcoming'}+Concert+Image`;
+
+            return `
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 items-center border-b border-gray-100 py-4 ${opacityClass}">
+                    <div class="md:col-span-1">
+                        <p class="text-lg font-bold">${concert.date}</p>
+                        <p class="text-sm text-gray-500">${concert.day} / ${concert.location}</p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <!-- font-mincho クラスは Zen Kaku Gothic New にマッピングされました -->
+                        <p class="text-lg font-mincho font-medium">${concert[titleKey]}</p>
+                        <p class="text-sm text-gray-600 font-mincho">${concert[programKey]}</p>
+                    </div>
+                    <div class="md:col-span-1">
+                        <img src="images/${concert.image}" 
+                             alt="${concert[titleKey]} Image" 
+                             class="w-full h-full object-cover"
+                             onerror="this.onerror=null;this.src='${imagePlaceholderUrl}';">
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Renders the concert lists (Upcoming and Past) based on the current language and limits the display count.
+         * @param {string} lang - The target language ('ja' or 'en').
+         */
+        function renderConcerts(lang) {
+            const upcomingListContainer = document.getElementById('upcoming-concert-list');
+            const pastListContainer = document.getElementById('past-concert-list');
+            const upcomingLinkContainer = document.getElementById('upcoming-concert-link-container');
+            const pastLinkContainer = document.getElementById('past-concert-link-container');
+
+            // --- 今後の演奏会 (Upcoming) ---
+            const UPCOMING_LIMIT = 3; // 表示制限
+            const upcomingToDisplay = concertData.upcoming.slice(0, UPCOMING_LIMIT);
+            const upcomingTotal = concertData.upcoming.length;
+
+            if (upcomingListContainer) {
+                upcomingListContainer.innerHTML = upcomingToDisplay.map(concert => 
+                    generateConcertHtml(concert, lang, false)
+                ).join('');
+            }
+            
+            // 制限数より多いデータがある場合にリンクを表示
+            if (upcomingTotal > UPCOMING_LIMIT) {
+                upcomingLinkContainer.classList.remove('hidden');
+            } else {
+                upcomingLinkContainer.classList.add('hidden');
+            }
+
+            // --- 過去の演奏会 (Past) ---
+            const PAST_LIMIT = 1; // 表示制限
+            const pastToDisplay = concertData.past.slice(0, PAST_LIMIT);
+            const pastTotal = concertData.past.length;
+
+            if (pastListContainer) {
+                pastListContainer.innerHTML = pastToDisplay.map(concert => 
+                    generateConcertHtml(concert, lang, true)
+                ).join('');
+            }
+
+            // 制限数より多いデータがある場合にリンクを表示
+            if (pastTotal > PAST_LIMIT) {
+                pastLinkContainer.classList.remove('hidden');
+            } else {
+                pastLinkContainer.classList.add('hidden');
+            }
+
+            // Re-create icons (for the new buttons)
+            lucide.createIcons();
+        }
+
+
+        // --- Slider Variables & Functions ---
+        let currentSlideIndex = 0;
+        let slides = [];
+        let thumbnailIndicators = [];
+        const sliderContainer = document.getElementById('photo-slider');
+        const captionDisplay = document.getElementById('slide-caption');
+
+        /**
+         * Shows the specific slide and updates indicators/caption.
+         * @param {number} index - The index of the slide to show.
+         */
+        function showSlide(index) {
+            if (slides.length === 0) return;
+            
+            // Calculate actual index ensuring wrap-around
+            currentSlideIndex = (index + slides.length) % slides.length;
+
+            // Hide all slides and remove active styling from indicators
+            slides.forEach(slide => slide.classList.add('hidden'));
+            thumbnailIndicators.forEach(indicator => indicator.classList.remove('ring-4', 'ring-primary-red', 'opacity-100'));
+
+            // Show current slide and set active styling on indicator
+            const currentSlide = slides[currentSlideIndex];
+            const currentThumb = thumbnailIndicators[currentSlideIndex];
+            
+            if (currentSlide && currentThumb) {
+                currentSlide.classList.remove('hidden');
+                currentThumb.classList.add('ring-4', 'ring-primary-red', 'opacity-100');
+                
+                // Update caption based on current language
+                updateSliderCaption(currentSlide, currentLang);
+            }
+        }
+        
+        /**
+         * Updates the slider caption based on the current language.
+         * @param {HTMLElement} slideElement - The current slide element.
+         * @param {string} lang - The current language ('ja' or 'en').
+         */
+        function updateSliderCaption(slideElement, lang) {
+            const captionKey = lang === 'ja' ? 'caption_ja' : 'caption_en';
+            const captionText = slideElement.getAttribute(`data-${captionKey}`);
+            if (captionDisplay) {
+                captionDisplay.textContent = captionText || '';
+            }
+        }
+
+        /**
+         * Initializes the slider structure and sets up event listeners.
+         */
+        function initializeSlider() {
+            const thumbnailsContainer = document.getElementById('thumbnail-indicators');
+            const prevButton = document.getElementById('prev-slide');
+            const nextButton = document.getElementById('next-slide');
+
+            if (!sliderContainer || !thumbnailsContainer || !prevButton || !nextButton) return;
+
+            let slidesHtml = '';
+            let thumbnailsHtml = '';
+            
+            galleryData.forEach((item, index) => {
+                const imagePlaceholderUrl = `https://placehold.co/800x450/e0e0e0/333?text=Photo+${index + 1}`;
+                const captionJa = item.caption_ja || `画像 ${index + 1}`;
+                const captionEn = item.caption_en || `Image ${index + 1}`;
+
+                // Generate Slide HTML
+                // Note: Initially all are hidden. The first slide will be shown by showSlide(0)
+                slidesHtml += `
+                    <div class="slider-slide absolute inset-0 bg-gray-100 cursor-pointer hidden transition duration-500 ease-in-out" 
+                         data-slide-index="${index}" 
+                         data-src="${item.src}" 
+                         data-caption-ja="${captionJa}" 
+                         data-caption-en="${captionEn}">
+                        <img src="${item.src}" 
+                             alt="Gallery Photo ${index + 1}" 
+                             class="w-full h-full object-cover"
+                             onerror="this.onerror=null;this.src='${imagePlaceholderUrl}';">
+                    </div>
+                `;
+
+                // Generate Thumbnail HTML
+                thumbnailsHtml += `
+                    <div class="thumbnail-indicator w-16 h-12 rounded-lg overflow-hidden cursor-pointer opacity-70 hover:opacity-100 transition duration-300 ring-offset-2 ring-offset-white ring-4 ring-transparent"
+                         data-slide-index="${index}">
+                        <img src="${item.src}" 
+                             alt="Thumbnail ${index + 1}" 
+                             class="w-full h-full object-cover"
+                             onerror="this.onerror=null;this.src='${imagePlaceholderUrl}';">
+                    </div>
+                `;
+            });
+
+            // Insert HTML. Caption and buttons are already in the HTML.
+            sliderContainer.insertAdjacentHTML('afterbegin', slidesHtml);
+            thumbnailsContainer.innerHTML = thumbnailsHtml;
+
+            // Get references to newly created elements
+            slides = Array.from(document.querySelectorAll('.slider-slide'));
+            thumbnailIndicators = Array.from(document.querySelectorAll('.thumbnail-indicator'));
+
+            // Set initial slide
+            showSlide(currentSlideIndex);
+
+            // --- Event Listeners for Navigation ---
+            prevButton.addEventListener('click', () => showSlide(currentSlideIndex - 1));
+            nextButton.addEventListener('click', () => showSlide(currentSlideIndex + 1));
+
+            // Thumbnail Click Listener
+            thumbnailIndicators.forEach(thumb => {
+                thumb.addEventListener('click', (e) => {
+                    const index = parseInt(e.currentTarget.getAttribute('data-slide-index'));
+                    showSlide(index);
+                });
+            });
+
+            // Slide Click Listener (for Modal)
+            slides.forEach(slide => {
+                slide.addEventListener('click', (e) => {
+                    const src = slide.getAttribute('data-src');
+                    const lang = document.documentElement.lang;
+                    const captionKey = lang === 'ja' ? 'caption_ja' : 'caption_en';
+                    const caption = slide.getAttribute(`data-${captionKey}`);
+                    openModal(src, caption);
+                });
+            });
+        }
+        
         /**
          * Switches the language of the entire page content.
          * @param {string} lang - The target language ('ja' or 'en').
@@ -472,6 +707,15 @@
                 }
             });
 
+            // Re-render concerts since they depend on language (and also update button text)
+            renderConcerts(lang);
+            
+            // Update slider caption for the currently visible slide
+            const currentSlide = slides[currentSlideIndex];
+            if (currentSlide) {
+                updateSliderCaption(currentSlide, lang);
+            }
+
             // Update language toggle button (Desktop)
             const langToggleBtn = document.getElementById('current-lang-text');
             if (langToggleBtn) {
@@ -493,14 +737,17 @@
                 // The source of the image currently in the modal is needed to find the original item
                 const currentSrc = document.getElementById('modal-image').src.split('/').pop(); 
                 
-                // Find the gallery item that matches the current modal image
-                const currentItem = Array.from(document.querySelectorAll('.gallery-item')).find(item => {
-                    return item.getAttribute('data-src').split('/').pop() === currentSrc;
-                });
+                // Find the gallery item that matches the current modal image (check if data-src contains the currentSrc)
+                const currentItem = galleryData.find(item => item.src.split('/').pop() === currentSrc);
 
                 if (currentItem) {
-                    const captionKey = `data-caption-${lang}`;
-                    modalCaption.textContent = currentItem.getAttribute(captionKey) || currentItem.getAttribute('data-caption-ja'); // Fallback to Japanese
+                    const captionKey = lang === 'ja' ? 'caption_ja' : 'caption_en';
+                    // Use a temporary div to get the caption element based on the current slide structure for consistency
+                    const tempDiv = document.createElement('div');
+                    tempDiv.setAttribute(`data-caption-ja`, currentItem.caption_ja);
+                    tempDiv.setAttribute(`data-caption-en`, currentItem.caption_en);
+
+                    modalCaption.textContent = tempDiv.getAttribute(`data-${captionKey}`) || currentItem.caption_ja; // Fallback to Japanese
                 }
             }
         }
@@ -537,7 +784,11 @@
             // Set current year in footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
+            // Initialize the image slider
+            initializeSlider();
+
             // Initial content load (Start in Japanese)
+            // Note: switchLanguage is called after initializeSlider so it can update the caption
             switchLanguage(currentLang);
 
             // Language Toggle Button Click Handler (Desktop and Mobile)
@@ -570,19 +821,6 @@
                     mobileMenu.classList.add('hidden');
                     mobileMenuButton.querySelector('i').setAttribute('data-lucide', 'menu');
                     lucide.createIcons();
-                });
-            });
-
-            // --- Gallery Item Click Listeners ---
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const src = item.getAttribute('data-src');
-                    const lang = document.documentElement.lang;
-                    const captionKey = `data-caption-${lang}`;
-                    // Get caption based on current language, falling back to Japanese
-                    const caption = item.getAttribute(captionKey) || item.getAttribute('data-caption-ja'); 
-
-                    openModal(src, caption);
                 });
             });
 
